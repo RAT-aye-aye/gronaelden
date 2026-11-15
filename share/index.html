@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e13">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="The G.E. Archive — photographs and animated evidence.">
+<title>G.E. Archive — gronaelden.com</title>
+<style>
+  :root {
+    --bg: #0a0c10;
+    --panel: #12161f;
+    --line: rgba(255, 255, 255, .08);
+    --ink: #e9edf5;
+    --muted: #8a92a5;
+    --green: #7dbf63;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    background:
+      radial-gradient(80% 50% at 50% -10%, #142016 0%, transparent 60%),
+      var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: max(14px, env(safe-area-inset-top)) 16px 10px;
+    flex-wrap: wrap;
+  }
+  .back {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12.5px;
+    border: 1px solid var(--line);
+    padding: 5px 9px;
+    border-radius: 9px;
+    white-space: nowrap;
+  }
+  .back:hover { color: var(--ink); border-color: rgba(255, 255, 255, .2); }
+  h1 {
+    margin: 0;
+    font-size: 17px;
+    letter-spacing: -.2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h1 .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px rgba(125, 191, 99, .8);
+  }
+  .meta {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .refresh {
+    font: inherit;
+    font-size: 12px;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+  .refresh:hover { color: var(--ink); border-color: rgba(255, 255, 255, .2); }
+  .refresh:active { transform: scale(.96); }
+
+  main { flex: 1 0 auto; width: 100%; max-width: 980px; margin: 0 auto; padding: 4px 14px 10px; }
+
+  .status {
+    margin: 48px auto;
+    max-width: 420px;
+    padding: 24px 22px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    text-align: center;
+    line-height: 1.55;
+  }
+  .status[hidden] { display: none; }
+  .status strong { display: block; font-size: 16px; margin-bottom: 6px; }
+  .status p { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+  .status a { color: var(--green); text-decoration: none; font-size: 13px; font-weight: 600; }
+  .status a:hover { text-decoration: underline; }
+
+  .grid { columns: 2; column-gap: 10px; }
+  @media (min-width: 620px) { .grid { columns: 3; } }
+  @media (min-width: 900px) { .grid { columns: 4; } }
+
+  .tile {
+    display: block;
+    width: 100%;
+    margin: 0 0 10px;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    cursor: zoom-in;
+    break-inside: avoid;
+    position: relative;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .tile:hover, .tile:focus-visible {
+    border-color: rgba(125, 191, 99, .5);
+    transform: translateY(-1px);
+    outline: none;
+  }
+  .tile img, .tile video { width: 100%; height: auto; display: block; }
+  .tile .play {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .65);
+    color: #d9ffcf;
+    border: 1px solid rgba(125, 191, 99, .45);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .6px;
+    pointer-events: none;
+  }
+
+  footer {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 14px 16px max(16px, env(safe-area-inset-bottom));
+    color: #666e80;
+    font-size: 11.5px;
+    line-height: 1.55;
+  }
+  footer a { color: #8992a5; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, .12); }
+  footer a:hover { color: var(--ink); }
+  footer .warn { color: #747c8f; }
+
+  /* ---------- viewer ---------- */
+  .viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(4, 6, 9, .96);
+    display: flex;
+    flex-direction: column;
+  }
+  .viewer[hidden] { display: none; }
+  body.viewing { overflow: hidden; }
+
+  .viewer-bar {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: max(10px, env(safe-area-inset-top)) 12px 8px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  #caption {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #download {
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 5px 9px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  #download:hover { border-color: rgba(125, 191, 99, .5); }
+  #closeViewer {
+    font: inherit;
+    font-size: 12px;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 5px 9px;
+    cursor: pointer;
+  }
+
+  .stage {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: grid;
+    place-items: center;
+    padding: 4px 8px;
+  }
+  .stage img, .stage video {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    background: #000;
+  }
+  .stage video { width: auto; }
+
+  .nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 101;
+    width: 42px;
+    height: 64px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(10, 12, 16, .72);
+    color: var(--ink);
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+  .nav:hover:not(:disabled) { border-color: rgba(125, 191, 99, .5); }
+  .nav:disabled { opacity: .25; cursor: default; }
+  .nav.prev { left: 10px; }
+  .nav.next { right: 10px; }
+
+  .counter {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 6px 0 max(12px, env(safe-area-inset-bottom));
+    color: var(--muted);
+    font-size: 11.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 420px) {
+    h1 { font-size: 15.5px; }
+    .meta { font-size: 11px; }
+    .nav { width: 34px; height: 54px; font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../">← gronaelden.com</a>
+    <h1><span class="dot" aria-hidden="true"></span>G.E. Archive</h1>
+    <span class="meta" id="meta">loading…</span>
+    <button class="refresh" id="refresh" title="Check for new files" aria-label="Refresh">↻</button>
+  </header>
+
+  <main>
+    <div class="status" id="status" hidden></div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+  </main>
+
+  <footer>
+    Public archive. GIFs and photos live in
+    <a href="https://github.com/RAT-aye-aye/gronaelden/tree/main/share/media" target="_blank" rel="noopener">share/media</a>
+    on GitHub — drop files there and they appear here.
+    <span class="warn">Nothing is uploaded through this page.</span>
+  </footer>
+
+  <div class="viewer" id="viewer" hidden>
+    <div class="viewer-bar">
+      <span id="caption"></span>
+      <a id="download" download>Download</a>
+      <button id="closeViewer" type="button">Close</button>
+    </div>
+    <div class="stage" id="stage"></div>
+    <div class="counter" id="counter"></div>
+    <button class="nav prev" id="prev" type="button" aria-label="Previous">‹</button>
+    <button class="nav next" id="next" type="button" aria-label="Next">›</button>
+  </div>
+
+<script>
+(function () {
+  'use strict';
+
+  var REPO = 'RAT-aye-aye/gronaelden';
+  var FOLDER = 'share/media';
+  var API = 'https://api.github.com/repos/' + REPO + '/contents/' + FOLDER + '?ref=main';
+  var UPLOAD = 'https://github.com/' + REPO + '/upload/main/' + FOLDER;
+  var FILES = 'https://github.com/' + REPO + '/tree/main/' + FOLDER;
+
+  var IMAGE = /\.(jpe?g|png|gif|webp|avif)$/i;
+  var VIDEO = /\.(mp4|webm)$/i;
+  var CACHE_KEY = 'ge.archive.v1';
+  var CACHE_MS = 120000;
+
+  var grid = document.getElementById('grid');
+  var statusEl = document.getElementById('status');
+  var metaEl = document.getElementById('meta');
+  var refreshBtn = document.getElementById('refresh');
+  var viewer = document.getElementById('viewer');
+  var stage = document.getElementById('stage');
+  var caption = document.getElementById('caption');
+  var downloadEl = document.getElementById('download');
+  var counter = document.getElementById('counter');
+  var closeBtn = document.getElementById('closeViewer');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+
+  var items = [];
+  var current = -1;
+
+  function mediaUrl(name) {
+    return 'media/' + encodeURIComponent(name);
+  }
+
+  function sizeText(bytes) {
+    if (!bytes && bytes !== 0) return '';
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function showStatus(title, detail, linkHref, linkText) {
+    grid.textContent = '';
+    statusEl.textContent = '';
+    var strong = document.createElement('strong');
+    strong.textContent = title;
+    statusEl.appendChild(strong);
+    if (detail) {
+      var p = document.createElement('p');
+      p.textContent = detail;
+      statusEl.appendChild(p);
+    }
+    if (linkHref) {
+      var a = document.createElement('a');
+      a.href = linkHref;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = linkText || 'Open GitHub';
+      statusEl.appendChild(a);
+    }
+    statusEl.hidden = false;
+  }
+
+  function clearStatus() {
+    statusEl.hidden = true;
+    statusEl.textContent = '';
+  }
+
+  function render(list) {
+    items = list;
+    grid.textContent = '';
+    clearStatus();
+    metaEl.textContent = list.length === 1 ? '1 item' : list.length + ' items';
+
+    if (!list.length) {
+      showStatus('No evidence yet.',
+        'The archive is empty. Upload GIFs and photos to share/media and they will show up here.',
+        UPLOAD, 'Open the upload page ↗');
+      return;
+    }
+
+    list.forEach(function (item, index) {
+      var tile = document.createElement('button');
+      tile.type = 'button';
+      tile.className = 'tile';
+      tile.setAttribute('aria-label', 'Open ' + item.name);
+
+      var media;
+      if (item.video) {
+        media = document.createElement('video');
+        media.src = mediaUrl(item.name) + '#t=0.1';
+        media.muted = true;
+        media.loop = true;
+        media.playsInline = true;
+        media.preload = 'metadata';
+        var badge = document.createElement('span');
+        badge.className = 'play';
+        badge.textContent = 'VIDEO';
+        tile.appendChild(media);
+        tile.appendChild(badge);
+      } else {
+        media = document.createElement('img');
+        media.src = mediaUrl(item.name);
+        media.alt = item.name;
+        media.setAttribute('loading', 'lazy');
+        media.setAttribute('decoding', 'async');
+        tile.appendChild(media);
+      }
+
+      tile.addEventListener('click', function () { openViewer(index); });
+      grid.appendChild(tile);
+    });
+  }
+
+  function readCache() {
+    try {
+      var raw = sessionStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || !Array.isArray(data.items)) return null;
+      if (Date.now() - data.time > CACHE_MS) return null;
+      return data.items;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function writeCache(list) {
+    try {
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ time: Date.now(), items: list }));
+    } catch (e) { /* private mode */ }
+  }
+
+  function parseFiles(data) {
+    if (!Array.isArray(data)) return [];
+    return data.filter(function (f) {
+      return f && f.type === 'file' && (IMAGE.test(f.name) || VIDEO.test(f.name));
+    }).map(function (f) {
+      return { name: f.name, size: f.size, video: VIDEO.test(f.name) };
+    });
+  }
+
+  async function load(force) {
+    if (!force) {
+      var cached = readCache();
+      if (cached) {
+        render(cached);
+        return;
+      }
+    }
+    clearStatus();
+    metaEl.textContent = 'loading…';
+    refreshBtn.disabled = true;
+    try {
+      var res = await fetch(API, { headers: { 'Accept': 'application/vnd.github+json' } });
+      if (res.status === 404) {
+        render([]);
+        return;
+      }
+      if (!res.ok) {
+        throw new Error('HTTP ' + res.status);
+      }
+      var data = await res.json();
+      var list = parseFiles(data);
+      writeCache(list);
+      render(list);
+    } catch (e) {
+      if (items.length) {
+        metaEl.textContent = items.length + ' items (cached)';
+        return;
+      }
+      metaEl.textContent = 'offline';
+      showStatus('Could not load the archive.',
+        'GitHub did not answer. This is usually a rate limit or a bad connection. Try again in a minute.',
+        FILES, 'Open the folder on GitHub ↗');
+    } finally {
+      refreshBtn.disabled = false;
+    }
+  }
+
+  /* ---------- viewer ---------- */
+
+  function openViewer(index) {
+    current = index;
+    viewer.hidden = false;
+    document.body.classList.add('viewing');
+    renderViewer();
+  }
+
+  function closeViewer() {
+    viewer.hidden = true;
+    document.body.classList.remove('viewing');
+    stage.textContent = '';
+    current = -1;
+  }
+
+  function renderViewer() {
+    if (current < 0 || current >= items.length) return;
+    var item = items[current];
+    stage.textContent = '';
+
+    var media;
+    if (item.video) {
+      media = document.createElement('video');
+      media.src = mediaUrl(item.name);
+      media.controls = true;
+      media.autoplay = true;
+      media.muted = true;
+      media.loop = true;
+      media.playsInline = true;
+    } else {
+      media = document.createElement('img');
+      media.src = mediaUrl(item.name);
+      media.alt = item.name;
+    }
+    stage.appendChild(media);
+
+    var size = sizeText(item.size);
+    caption.textContent = item.name + (size ? ' · ' + size : '');
+    downloadEl.href = mediaUrl(item.name);
+    downloadEl.setAttribute('download', item.name);
+    counter.textContent = (current + 1) + ' / ' + items.length;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === items.length - 1;
+  }
+
+  function step(delta) {
+    var next = current + delta;
+    if (next < 0 || next >= items.length) return;
+    current = next;
+    renderViewer();
+  }
+
+  refreshBtn.addEventListener('click', function () { load(true); });
+  closeBtn.addEventListener('click', closeViewer);
+  prevBtn.addEventListener('click', function () { step(-1); });
+  nextBtn.addEventListener('click', function () { step(1); });
+
+  [viewer, stage].forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      if (e.target === el) closeViewer();
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (viewer.hidden) return;
+    if (e.key === 'Escape') closeViewer();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+
+  load(false);
+})();
+</script>
+</body>
+</html>
