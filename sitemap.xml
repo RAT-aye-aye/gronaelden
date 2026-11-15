@@ -9,6 +9,9 @@
     <loc>https://gronaelden.com/share/</loc>
     <changefreq>weekly</changefreq>
     <image:image>
+      <image:loc>https://gronaelden.com/share/media/grona-elden-ascended.jpg</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://gronaelden.com/share/media/grona-elden-emo.jpg</image:loc>
     </image:image>
     <image:image>
@@ -37,6 +40,9 @@
     </image:image>
     <image:image>
       <image:loc>https://gronaelden.com/share/media/grona-elden-side-eye.gif</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/grona-elden-the-horror.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://gronaelden.com/share/media/grona-elden-tongue.jpg</image:loc>
