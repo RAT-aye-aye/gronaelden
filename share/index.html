@@ -114,6 +114,14 @@
   .status a { color: var(--green); text-decoration: none; font-size: 13px; font-weight: 600; }
   .status a:hover { text-decoration: underline; }
 
+  .fallback {
+    margin: 10px 16px 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .fallback a { color: var(--green); text-decoration: none; }
+
   .grid { columns: 2; column-gap: 10px; }
   @media (min-width: 620px) { .grid { columns: 3; } }
   @media (min-width: 900px) { .grid { columns: 4; } }
@@ -278,6 +286,12 @@
   </header>
 
   <main>
+    <noscript>
+      <p class="fallback">The G.E. Archive collects photographs, GIFs and animated
+      evidence of Gröna Elden. The gallery needs JavaScript to load; every file
+      lives in
+      <a href="https://github.com/RAT-aye-aye/gronaelden/tree/main/share/media">share/media</a>.</p>
+    </noscript>
     <div class="status" id="status" hidden></div>
     <div class="grid" id="grid" aria-live="polite"></div>
   </main>
@@ -312,6 +326,7 @@
   var EDGE = EDGE_META ? String(EDGE_META.getAttribute('content') || '').replace(/\/+$/, '') : '';
   var EDGE_LIST = EDGE ? EDGE + '/list' : '';
   var UPLOAD = 'https://github.com/' + REPO + '/upload/main/' + FOLDER;
+  var MANIFEST = 'media/manifest.json';
   var FILES = 'https://github.com/' + REPO + '/tree/main/' + FOLDER;
 
   var IMAGE = /\.(jpe?g|png|gif|webp|avif)$/i;
@@ -441,10 +456,27 @@
   function parseFiles(data) {
     if (!Array.isArray(data)) return [];
     return data.filter(function (f) {
-      return f && f.type === 'file' && (IMAGE.test(f.name) || VIDEO.test(f.name));
+      var isFile = !f || f.type === undefined || f.type === 'file';
+      return f && isFile && (IMAGE.test(f.name) || VIDEO.test(f.name));
     }).map(function (f) {
       return { name: f.name, size: f.size, video: VIDEO.test(f.name) };
     });
+  }
+
+  // A committed list of the folder, served from this site. It needs no API,
+  // no quota and no network round trip to GitHub, so the gallery always has
+  // something real to show — including to a crawler that renders the page.
+  async function fetchManifest() {
+    try {
+      var res = await fetch(MANIFEST, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) return null;
+      var data = await res.json();
+      var list = Array.isArray(data) ? data : (data && Array.isArray(data.items) ? data.items : null);
+      if (!list) return null;
+      return parseFiles(list);
+    } catch (e) {
+      return null;
+    }
   }
 
   async function fetchListing(force) {
@@ -480,13 +512,19 @@
     clearStatus();
     metaEl.textContent = 'loading…';
     refreshBtn.disabled = true;
+
+    // Paint from the committed manifest first. This is what keeps the page
+    // from ever being an empty box or an error card for a crawler.
+    var manifest = await fetchManifest();
+    if (manifest && manifest.length) render(manifest);
+
     try {
       var list = await fetchListing(force);
       writeCache(list);
       render(list);
     } catch (e) {
       if (items.length) {
-        metaEl.textContent = items.length + ' items (cached)';
+        metaEl.textContent = items.length === 1 ? '1 item' : items.length + ' items';
         return;
       }
       metaEl.textContent = 'offline';

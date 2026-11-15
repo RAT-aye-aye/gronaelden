@@ -56,6 +56,7 @@ async function main() {
   /* -------- the edge answers -------- */
   {
     const { doc, calls } = boot(async (target) => {
+      if (target.indexOf('manifest.json') !== -1) return jsonResponse({ items: [] });
       if (target.indexOf(EDGE + '/list') === 0) return jsonResponse(edgeFiles);
       if (target.indexOf('api.github.com') !== -1) return jsonResponse(githubFiles);
       throw new Error('unexpected ' + target);
@@ -69,8 +70,10 @@ async function main() {
       grid.querySelector('img').getAttribute('src'));
     ok('github was not asked', calls.every((c) => c.url.indexOf('api.github.com') === -1),
       calls.map((c) => c.url));
-    ok('the first call is the edge', calls[0].url === EDGE + '/list', calls[0].url);
-    ok('no force flag on the first load', calls[0].url.indexOf('force') === -1);
+    const listingCalls = calls.filter((c) => c.url.indexOf('manifest.json') === -1);
+    ok('the manifest is fetched first', calls[0].url.indexOf('manifest.json') !== -1, calls[0].url);
+    ok('the first listing call is the edge', listingCalls[0].url === EDGE + '/list', listingCalls[0].url);
+    ok('no force flag on the first load', listingCalls[0].url.indexOf('force') === -1);
     ok('meta counts the edge items', doc.getElementById('meta').textContent === '2 items',
       doc.getElementById('meta').textContent);
   }
@@ -119,6 +122,24 @@ async function main() {
     await tick(80);
     ok('refresh sends force=1', calls.some((c) => c.url === EDGE + '/list?force=1'),
       calls.map((c) => c.url));
+  }
+
+  /* -------- soft-404 guard: the manifest alone keeps the page full -------- */
+  {
+    const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'share', 'media', 'manifest.json'), 'utf8'));
+    const { doc } = boot(async (target) => {
+      if (target.indexOf('manifest.json') !== -1) return jsonResponse(manifest);
+      throw new TypeError('rate limited by everything');
+    });
+    await tick(150);
+    const tiles = doc.querySelectorAll('#grid .tile').length;
+    ok('a manifest keeps the gallery full when every API fails',
+      tiles === manifest.items.length, { tiles: tiles, manifest: manifest.items.length });
+    ok('no error card when the manifest has content',
+      doc.getElementById('status').hidden === true, doc.getElementById('status').textContent);
+    ok('the count comes from the manifest',
+      doc.getElementById('meta').textContent === manifest.items.length + ' items',
+      doc.getElementById('meta').textContent);
   }
 
   /* -------- both down -------- */

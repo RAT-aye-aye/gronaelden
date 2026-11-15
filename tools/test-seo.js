@@ -32,7 +32,9 @@ ok('sitemap lists the apex', locs.indexOf('https://gronaelden.com/') !== -1);
 ok('sitemap lists the archive', locs.indexOf('https://gronaelden.com/share/') !== -1);
 
 const imageLocs = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((m) => m[1]);
-const media = fs.readdirSync(path.join(dir, 'share', 'media')).filter((f) => !f.startsWith('.'));
+const media = fs
+  .readdirSync(path.join(dir, 'share', 'media'))
+  .filter((f) => !f.startsWith('.') && f !== 'manifest.json');
 const PREFIX = 'https://gronaelden.com/share/media/';
 const shareLocs = imageLocs.filter((u) => u.startsWith(PREFIX));
 
@@ -49,6 +51,18 @@ ok('the sitemap has one entry per media file', shareLocs.length === media.length
 });
 ok('the sitemap lists the apex photo',
   imageLocs.indexOf('https://gronaelden.com/photo.jpg') !== -1);
+
+/* ---------- manifest: what the gallery paints before any API call ---------- */
+const manifest = JSON.parse(read('share/media/manifest.json'));
+const manifestNames = manifest.items.map((i) => i.name);
+ok('manifest lists every media file',
+  media.every((f) => manifestNames.indexOf(f) !== -1), media.filter((f) => manifestNames.indexOf(f) === -1));
+ok('manifest has no extra files',
+  manifestNames.every((f) => media.indexOf(f) !== -1), manifestNames.filter((f) => media.indexOf(f) === -1));
+ok('manifest sizes match the files',
+  manifest.items.every((i) => fs.statSync(path.join(dir, 'share', 'media', i.name)).size === i.size));
+ok('manifest carries no paths or urls',
+  manifestNames.every((n) => n.indexOf('/') === -1 && n.indexOf('http') === -1));
 
 /* ---------- share page head ---------- */
 ok('archive is indexable', /name="robots" content="index[^"]*"/.test(share) && !/noindex/.test(share));

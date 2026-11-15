@@ -18,8 +18,16 @@ It is deliberately **not linked from the apex**, which stays a pure photo page.
 - The page is **indexable on purpose**: `index, follow, max-image-preview:large`,
   a real title and description, Open Graph tags for link previews, and an entry
   in `sitemap.xml` (which `robots.txt` points at). The apex stays a plain photo.
+- The first paint comes from `share/media/manifest.json`, a committed list of
+  the folder served from this site. No API, no quota, instant. The live listing
+  (edge, then GitHub) is fetched afterwards and replaces it.
 - Listings are cached in `sessionStorage` for two minutes; the ↻ button forces
   a fresh check.
+
+The manifest is not a nicety: Google's crawl of `/share/` came back as a
+**Soft 404** because GitHub rate-limits its IPs, the page then rendered
+"Could not load the archive", and that reads as an error page. With the
+manifest, the page always has real content to render.
 
 The listing goes through the `edge` Worker at `api.gronaelden.com` when it is
 deployed, which caches the answer in KV for five minutes and (with a GitHub
@@ -34,8 +42,14 @@ Upload page:
 
 - `robots.txt` allows everything and points at `https://gronaelden.com/sitemap.xml`.
 - `sitemap.xml` lists the apex, `/share/`, and every file in `share/media` as an
-  `image:image`. **When you add media, add it to the sitemap too** —
-  `tools/test-seo.js` fails if the two drift apart.
+  `image:image`. `share/media/manifest.json` is the gallery's first paint.
+- Both are generated. After adding or removing files, run:
+
+  ```sh
+  node tools/build-index.mjs
+  ```
+
+  `tools/test-seo.js` fails if either drifts from the folder.
 - To make Google pick it up faster: Search Console → add `gronaelden.com` →
   verify (a DNS TXT record at Porkbun, or a file I can add to the repo) →
   Sitemaps → submit `sitemap.xml`. An inbound link from an already-indexed site
@@ -55,4 +69,7 @@ Upload page:
 NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-share.js
 NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-share-edge.js
 NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-seo.js
+
+# regenerate manifest.json + sitemap.xml after adding media
+node tools/build-index.mjs
 ```
