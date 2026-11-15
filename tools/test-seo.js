@@ -93,6 +93,16 @@ const apexOg = (apex.match(/property="og:image" content="([^"]+)"/) || [])[1] ||
 ok('apex has an og:image', apexOg === 'https://gronaelden.com/photo.jpg', apexOg);
 ok('apex declares the image size', /og:image:width" content="596"/.test(apex) && /og:image:height" content="468"/.test(apex));
 
+/* ---------- the disclaimer: this is a joke, and the author is not ---------- */
+const DISCLAIMER = /fake religion, made for laughs/;
+const CHURCH = /The Church of Jesus Christ of\s+Latter-day Saints/;
+ok('apex says it is a fake religion', DISCLAIMER.test(apex));
+ok('apex names the real church', CHURCH.test(apex));
+ok('the disclaimer is visible text, not just metadata',
+  /<footer[\s\S]*fake religion[\s\S]*<\/footer>/.test(apex));
+ok('the description says it is a joke too', /A fake religion, made for laughs/.test(
+  (apex.match(/name="description" content="([^"]+)"/) || [])[1] || ''));
+
 /* ---------- Bible: a real page, deliberately kept out of the index until it has content ---------- */
 const bible = read('Bible/index.html');
 ok('bible has a title', /<title>The Book of Gronest — coming soon<\/title>/.test(bible));
@@ -106,6 +116,7 @@ ok('bible declares the real image size',
   /width="1100"/.test(bible) && /height="1430"/.test(bible));
 ok('bible says coming soon', /Coming soon/i.test(bible));
 ok('bible links back to the apex', /href="\.\.\/"/.test(bible));
+ok('bible carries the disclaimer too', DISCLAIMER.test(bible) && CHURCH.test(bible));
 ok('the sitemap does not list the unindexed bible page',
   locs.indexOf('https://gronaelden.com/Bible/') === -1, locs);
 ok('the sitemap image urls all resolve to files',

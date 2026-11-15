@@ -11,6 +11,12 @@ Gronest: <https://gronaelden.com>. Static, served by GitHub Pages.
 - `Bible/index.html` — the book page. Currently "coming soon", and therefore
   `noindex, follow` and kept out of the sitemap until it has real content.
 
+All three pages carry the same footer note: **this is a fake religion, made for
+laughs, and the person who runs the site is a believing member of The Church of
+Jesus Christ of Latter-day Saints.** Keep it on every page — it is the one thing
+that keeps the joke from being mistaken for a real movement, and
+`tools/test-seo.js` / `tools/test-share.js` fail if it goes missing.
+
 ## /share/ — the G.E. Archive
 
 <https://gronaelden.com/share/> is a small public gallery of GIFs and photos,

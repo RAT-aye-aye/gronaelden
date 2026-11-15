@@ -108,6 +108,9 @@ function responder(list) {
   ok('the preview image exists in the repo',
     fs.existsSync(path.join(dir, ogImage.replace('https://gronaelden.com/', ''))), ogImage);
   ok('the preview image is the main photo', /\/photo\.jpg$/.test(ogImage), ogImage);
+  ok('the page carries the disclaimer',
+    /fake religion, made for laughs/.test(html) &&
+      /The Church of Jesus Christ of\s+Latter-day Saints/.test(html));
 
   console.log(failures === 0 ? '\nALL ARCHIVE TESTS PASSED' : '\n' + failures + ' ARCHIVE TEST(S) FAILED');
   process.exit(failures ? 1 : 0);
