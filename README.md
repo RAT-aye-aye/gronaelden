@@ -15,7 +15,9 @@ It is deliberately **not linked from the apex**, which stays a pure photo page.
   and previous/next navigation.
 - Viewing needs no repo permissions. There is no upload backend: whoever owns
   the repo adds files, everyone else just opens the link.
-- The page is `noindex`, so it stays out of search results.
+- The page is **indexable on purpose**: `index, follow, max-image-preview:large`,
+  a real title and description, Open Graph tags for link previews, and an entry
+  in `sitemap.xml` (which `robots.txt` points at). The apex stays a plain photo.
 - Listings are cached in `sessionStorage` for two minutes; the ↻ button forces
   a fresh check.
 
@@ -27,6 +29,17 @@ directly, so nothing breaks. See <https://github.com/RAT-aye-aye/edge>.
 
 Upload page:
 <https://github.com/RAT-aye-aye/gronaelden/upload/main/share/media>
+
+## Search engines
+
+- `robots.txt` allows everything and points at `https://gronaelden.com/sitemap.xml`.
+- `sitemap.xml` lists the apex, `/share/`, and every file in `share/media` as an
+  `image:image`. **When you add media, add it to the sitemap too** —
+  `tools/test-seo.js` fails if the two drift apart.
+- To make Google pick it up faster: Search Console → add `gronaelden.com` →
+  verify (a DNS TXT record at Porkbun, or a file I can add to the repo) →
+  Sitemaps → submit `sitemap.xml`. An inbound link from an already-indexed site
+  (say the varnic.org hub) helps more than anything else.
 
 ## The photo
 
@@ -40,4 +53,5 @@ Upload page:
 ```sh
 NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-share.js
 NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-share-edge.js
+NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-seo.js
 ```

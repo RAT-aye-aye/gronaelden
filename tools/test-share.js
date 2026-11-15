@@ -100,7 +100,9 @@ function responder(list) {
 
   /* static checks */
   ok('no external scripts', doc.querySelectorAll('script[src]').length === 0);
-  ok('page is noindex', /noindex/.test(html));
+  ok('page is indexable', /name="robots" content="index/.test(html) && !/noindex/.test(html));
+  ok('page has a description', /name="description" content="[^"]{20,}"/.test(html));
+  ok('page has a share preview image', /property="og:image" content="https:\/\/gronaelden\.com\/share\/media\//.test(html));
 
   console.log(failures === 0 ? '\nALL ARCHIVE TESTS PASSED' : '\n' + failures + ' ARCHIVE TEST(S) FAILED');
   process.exit(failures ? 1 : 0);
