@@ -102,7 +102,12 @@ function responder(list) {
   ok('no external scripts', doc.querySelectorAll('script[src]').length === 0);
   ok('page is indexable', /name="robots" content="index/.test(html) && !/noindex/.test(html));
   ok('page has a description', /name="description" content="[^"]{20,}"/.test(html));
-  ok('page has a share preview image', /property="og:image" content="https:\/\/gronaelden\.com\/share\/media\//.test(html));
+  const ogImage = (html.match(/property="og:image" content="([^"]+)"/) || [])[1] || '';
+  ok('page has a share preview image',
+    /^https:\/\/gronaelden\.com\//.test(ogImage) && /\.(jpe?g|png|gif|webp)$/i.test(ogImage), ogImage);
+  ok('the preview image exists in the repo',
+    fs.existsSync(path.join(dir, ogImage.replace('https://gronaelden.com/', ''))), ogImage);
+  ok('the preview image is the main photo', /\/photo\.jpg$/.test(ogImage), ogImage);
 
   console.log(failures === 0 ? '\nALL ARCHIVE TESTS PASSED' : '\n' + failures + ' ARCHIVE TEST(S) FAILED');
   process.exit(failures ? 1 : 0);

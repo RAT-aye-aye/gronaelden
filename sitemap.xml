@@ -4,6 +4,9 @@
   <url>
     <loc>https://gronaelden.com/</loc>
     <changefreq>yearly</changefreq>
+    <image:image>
+      <image:loc>https://gronaelden.com/photo.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gronaelden.com/share/</loc>

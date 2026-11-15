@@ -43,7 +43,8 @@ Upload page:
 
 ## The photo
 
-- `photo.jpg` — the apex image (1672×941).
+- `photo.jpg` — the apex image (596×468). Also the `og:image` for the apex and
+  for `/share/`, so every link preview shows him.
 - Displayed with `object-fit: contain`, so the whole photo is always visible,
   with black bars filling the rest of the screen (letterboxed).
 - `CNAME` points the site at `gronaelden.com`; HTTPS is enforced.

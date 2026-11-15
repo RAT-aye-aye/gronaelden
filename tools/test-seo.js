@@ -33,20 +33,22 @@ ok('sitemap lists the archive', locs.indexOf('https://gronaelden.com/share/') !=
 
 const imageLocs = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((m) => m[1]);
 const media = fs.readdirSync(path.join(dir, 'share', 'media')).filter((f) => !f.startsWith('.'));
+const PREFIX = 'https://gronaelden.com/share/media/';
+const shareLocs = imageLocs.filter((u) => u.startsWith(PREFIX));
 
-const missing = media.filter(
-  (f) => imageLocs.indexOf('https://gronaelden.com/share/media/' + f) === -1
-);
+const missing = media.filter((f) => shareLocs.indexOf(PREFIX + f) === -1);
 ok('every media file is in the sitemap', missing.length === 0, missing);
 
-const ghosts = imageLocs
-  .map((u) => u.replace('https://gronaelden.com/share/media/', ''))
+const ghosts = shareLocs
+  .map((u) => u.replace(PREFIX, ''))
   .filter((f) => media.indexOf(f) === -1);
 ok('the sitemap invents no files', ghosts.length === 0, ghosts);
-ok('the sitemap has all 12 images', imageLocs.length === media.length, {
-  sitemap: imageLocs.length,
+ok('the sitemap has one entry per media file', shareLocs.length === media.length, {
+  sitemap: shareLocs.length,
   files: media.length
 });
+ok('the sitemap lists the apex photo',
+  imageLocs.indexOf('https://gronaelden.com/photo.jpg') !== -1);
 
 /* ---------- share page head ---------- */
 ok('archive is indexable', /name="robots" content="index[^"]*"/.test(share) && !/noindex/.test(share));
@@ -56,15 +58,19 @@ ok('archive has a canonical url',
 ok('archive has a real title', /<title>G\.E\. Archive — Gröna Elden<\/title>/.test(share));
 ok('archive has a description',
   /name="description" content="The G\.E\. Archive/.test(share));
+const ogImage = (share.match(/property="og:image" content="([^"]+)"/) || [])[1] || '';
 ok('archive has an og:image pointing at a real file',
-  (share.match(/property="og:image" content="([^"]+)"/) || [])
-    .slice(1)
-    .every((u) => media.indexOf(u.replace('https://gronaelden.com/share/media/', '')) !== -1));
+  fs.existsSync(path.join(dir, ogImage.replace('https://gronaelden.com/', ''))) && ogImage !== '',
+  ogImage);
+ok('the archive preview uses the main photo', /\/photo\.jpg$/.test(ogImage), ogImage);
 ok('archive has a twitter card', /name="twitter:card" content="summary_large_image"/.test(share));
 
 /* ---------- apex ---------- */
 ok('apex is not blocked from indexing', !/name="robots"[^>]*noindex/.test(apex));
-ok('apex still has a title', /<title>[^<]*<\/title>/.test(apex));
+ok('apex still has a title', /<title>Gröna Elden<\/title>/.test(apex));
+const apexOg = (apex.match(/property="og:image" content="([^"]+)"/) || [])[1] || '';
+ok('apex has an og:image', apexOg === 'https://gronaelden.com/photo.jpg', apexOg);
+ok('apex declares the image size', /og:image:width" content="596"/.test(apex) && /og:image:height" content="468"/.test(apex));
 
 console.log(failures === 0 ? '\nALL SEO TESTS PASSED' : '\n' + failures + ' SEO TEST(S) FAILED');
 process.exit(failures ? 1 : 0);
