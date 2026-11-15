@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>gronaelden</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  #photo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    background: #000;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    opacity: 0;
+    transition: opacity .6s ease;
+  }
+  #photo.loaded { opacity: 1; }
+</style>
+</head>
+<body>
+  <img id="photo" alt="gronaelden" decoding="async">
+  <script>
+    // Uses whichever image file is present in the repo.
+    var sources = ['photo.png', 'photo.jpg', 'photo.jpeg', 'photo.webp', 'photo.avif'];
+    var i = 0;
+    var img = document.getElementById('photo');
+    img.onerror = function () {
+      if (++i < sources.length) img.src = sources[i];
+    };
+    img.onload = function () { img.classList.add('loaded'); };
+    img.src = sources[0];
+  </script>
+</body>
+</html>
