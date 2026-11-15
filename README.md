@@ -19,6 +19,12 @@ It is deliberately **not linked from the apex**, which stays a pure photo page.
 - Listings are cached in `sessionStorage` for two minutes; the ↻ button forces
   a fresh check.
 
+The listing goes through the `edge` Worker at `api.gronaelden.com` when it is
+deployed, which caches the answer in KV for five minutes and (with a GitHub
+token set on the Worker) raises the upstream limit from 60 requests/hour per IP
+to 5,000. If the edge is missing or down, the page falls back to calling GitHub
+directly, so nothing breaks. See <https://github.com/RAT-aye-aye/edge>.
+
 Upload page:
 <https://github.com/RAT-aye-aye/gronaelden/upload/main/share/media>
 
@@ -33,4 +39,5 @@ Upload page:
 
 ```sh
 NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-share.js
+NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-share-edge.js
 ```

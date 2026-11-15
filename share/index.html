@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0e13">
 <meta name="robots" content="noindex, nofollow">
+<meta name="edge-api" content="https://api.gronaelden.com">
 <meta name="description" content="The G.E. Archive — photographs and animated evidence.">
 <title>G.E. Archive — gronaelden.com</title>
 <style>
@@ -293,6 +294,9 @@
   var REPO = 'RAT-aye-aye/gronaelden';
   var FOLDER = 'share/media';
   var API = 'https://api.github.com/repos/' + REPO + '/contents/' + FOLDER + '?ref=main';
+  var EDGE_META = document.querySelector('meta[name="edge-api"]');
+  var EDGE = EDGE_META ? String(EDGE_META.getAttribute('content') || '').replace(/\/+$/, '') : '';
+  var EDGE_LIST = EDGE ? EDGE + '/list' : '';
   var UPLOAD = 'https://github.com/' + REPO + '/upload/main/' + FOLDER;
   var FILES = 'https://github.com/' + REPO + '/tree/main/' + FOLDER;
 
@@ -429,6 +433,28 @@
     });
   }
 
+  async function fetchListing(force) {
+    // The edge answers from its own cache and its own GitHub quota, which
+    // removes the 60-per-hour limit the browser shares with everyone else
+    // on the same IP. When it is not deployed (or is down), go direct.
+    if (EDGE_LIST) {
+      try {
+        var edgeRes = await fetch(EDGE_LIST + (force ? '?force=1' : ''), {
+          headers: { 'Accept': 'application/json' }
+        });
+        if (edgeRes.ok) {
+          var edgeData = await edgeRes.json();
+          if (Array.isArray(edgeData)) return parseFiles(edgeData);
+        }
+      } catch (e) { /* fall through to GitHub */ }
+    }
+
+    var res = await fetch(API, { headers: { 'Accept': 'application/vnd.github+json' } });
+    if (res.status === 404) return [];
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return parseFiles(await res.json());
+  }
+
   async function load(force) {
     if (!force) {
       var cached = readCache();
@@ -441,16 +467,7 @@
     metaEl.textContent = 'loading…';
     refreshBtn.disabled = true;
     try {
-      var res = await fetch(API, { headers: { 'Accept': 'application/vnd.github+json' } });
-      if (res.status === 404) {
-        render([]);
-        return;
-      }
-      if (!res.ok) {
-        throw new Error('HTTP ' + res.status);
-      }
-      var data = await res.json();
-      var list = parseFiles(data);
+      var list = await fetchListing(force);
       writeCache(list);
       render(list);
     } catch (e) {
@@ -460,7 +477,7 @@
       }
       metaEl.textContent = 'offline';
       showStatus('Could not load the archive.',
-        'GitHub did not answer. This is usually a rate limit or a bad connection. Try again in a minute.',
+        'The listing service did not answer. This is usually a rate limit or a bad connection. Try again in a minute.',
         FILES, 'Open the folder on GitHub ↗');
     } finally {
       refreshBtn.disabled = false;
