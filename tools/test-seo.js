@@ -82,9 +82,36 @@ ok('archive has a twitter card', /name="twitter:card" content="summary_large_ima
 /* ---------- apex ---------- */
 ok('apex is not blocked from indexing', !/name="robots"[^>]*noindex/.test(apex));
 ok('apex still has a title', /<title>Gröna Elden<\/title>/.test(apex));
+ok('apex shows the photo', /<img[^>]+src="photo\.jpg"/.test(apex));
+ok('apex links to the archive', /href="share\/"/.test(apex));
+ok('apex shows the book', /<img[^>]+src="bible\.jpg"/.test(apex));
+ok('apex links to the book', /href="Bible\/"/.test(apex));
+ok('the book image exists', fs.existsSync(path.join(dir, 'bible.jpg')));
+ok('the sitemap lists the book image',
+  imageLocs.indexOf('https://gronaelden.com/bible.jpg') !== -1);
 const apexOg = (apex.match(/property="og:image" content="([^"]+)"/) || [])[1] || '';
 ok('apex has an og:image', apexOg === 'https://gronaelden.com/photo.jpg', apexOg);
 ok('apex declares the image size', /og:image:width" content="596"/.test(apex) && /og:image:height" content="468"/.test(apex));
+
+/* ---------- Bible: a real page, deliberately kept out of the index until it has content ---------- */
+const bible = read('Bible/index.html');
+ok('bible has a title', /<title>The Book of Gronest — coming soon<\/title>/.test(bible));
+ok('bible has a canonical url',
+  /rel="canonical" href="https:\/\/gronaelden\.com\/Bible\/"/.test(bible));
+ok('bible is kept out of the index while it is empty',
+  /name="robots" content="noindex[^"]*"/.test(bible));
+ok('bible still lets links be followed', /name="robots" content="noindex, follow"/.test(bible));
+ok('bible shows the book', /<img[^>]+src="\.\.\/bible\.jpg"/.test(bible));
+ok('bible declares the real image size',
+  /width="1100"/.test(bible) && /height="1430"/.test(bible));
+ok('bible says coming soon', /Coming soon/i.test(bible));
+ok('bible links back to the apex', /href="\.\.\/"/.test(bible));
+ok('the sitemap does not list the unindexed bible page',
+  locs.indexOf('https://gronaelden.com/Bible/') === -1, locs);
+ok('the sitemap image urls all resolve to files',
+  imageLocs.every((u) => fs.existsSync(path.join(dir, u.replace('https://gronaelden.com/', '')))),
+  imageLocs.filter((u) => !fs.existsSync(path.join(dir, u.replace('https://gronaelden.com/', '')))));
+
 
 console.log(failures === 0 ? '\nALL SEO TESTS PASSED' : '\n' + failures + ' SEO TEST(S) FAILED');
 process.exit(failures ? 1 : 0);

@@ -7,6 +7,9 @@
     <image:image>
       <image:loc>https://gronaelden.com/photo.jpg</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/bible.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gronaelden.com/share/</loc>

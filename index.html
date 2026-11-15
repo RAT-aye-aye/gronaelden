@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#05070a">
 <meta name="google-site-verification" content="25RXT3I-x2giVaqn8cqhA5cGt9yCPx8T1grUVd-vNJs">
 <title>Gröna Elden</title>
-<meta name="description" content="Gröna Elden.">
+<meta name="description" content="Gröna Elden — the archive of photographs and animated evidence, and the Book of Gronest.">
 <link rel="canonical" href="https://gronaelden.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="gronaelden">
 <meta property="og:title" content="Gröna Elden">
-<meta property="og:description" content="Gröna Elden.">
+<meta property="og:description" content="Gröna Elden — the archive, and the Book of Gronest.">
 <meta property="og:url" content="https://gronaelden.com/">
 <meta property="og:image" content="https://gronaelden.com/photo.jpg">
 <meta property="og:image:width" content="596">
@@ -19,47 +19,143 @@
 <meta property="og:image:alt" content="Gröna Elden">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Gröna Elden">
-<meta name="twitter:description" content="Gröna Elden.">
+<meta name="twitter:description" content="Gröna Elden — the archive, and the Book of Gronest.">
 <meta name="twitter:image" content="https://gronaelden.com/photo.jpg">
 <style>
-  html, body {
+  :root {
+    --bg: #05070a;
+    --line: rgba(255, 255, 255, .08);
+    --ink: #e9edf5;
+    --muted: #8a92a5;
+    --green: #7dbf63;
+    --gold: #c9a24a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100dvh;
+    background:
+      radial-gradient(90% 55% at 50% 0%, #16211580 0%, transparent 60%),
+      var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: max(24px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
+  }
+
+  .head { text-align: center; }
+  h1 {
     margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #000;
-    overflow: hidden;
-    overscroll-behavior: none;
+    font-size: clamp(22px, 6vw, 28px);
+    font-weight: 700;
+    letter-spacing: .3px;
   }
-  #photo {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
+  .tag {
+    margin: 7px 0 0;
+    color: var(--gold);
+    font-size: 10.5px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+
+  .portrait {
     display: block;
-    background: #000;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-user-drag: none;
-    opacity: 0;
-    transition: opacity .6s ease;
+    width: auto;
+    max-width: min(100%, 420px);
+    max-height: 42vh;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .55);
   }
-  #photo.loaded { opacity: 1; }
+
+  .action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    max-width: 420px;
+    padding: 13px 16px;
+    text-decoration: none;
+    color: #d9f2cf;
+    background: rgba(125, 191, 99, .10);
+    border: 1px solid rgba(125, 191, 99, .38);
+    border-radius: 14px;
+    transition: background .15s ease, transform .15s ease, border-color .15s ease;
+  }
+  .action:hover, .action:focus-visible {
+    background: rgba(125, 191, 99, .18);
+    border-color: rgba(125, 191, 99, .6);
+    transform: translateY(-1px);
+    outline: none;
+  }
+  .action strong { display: block; font-size: 15px; font-weight: 650; }
+  .action em { display: block; margin-top: 3px; font-size: 11.5px; font-style: normal; color: #9fc98f; }
+  .action .arrow { font-size: 18px; color: var(--green); }
+
+  .book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .book img {
+    width: clamp(148px, 42vw, 186px);
+    height: auto;
+    border-radius: 9px;
+    border: 1px solid rgba(201, 162, 74, .32);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .6);
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .book:hover img, .book:focus-visible img {
+    transform: translateY(-2px) rotate(-.6deg);
+    border-color: rgba(201, 162, 74, .7);
+    box-shadow: 0 18px 46px rgba(0, 0, 0, .7);
+  }
+  .book .label {
+    font-size: 11.5px;
+    color: var(--muted);
+    letter-spacing: .05em;
+  }
+  .book .label b { color: var(--gold); font-weight: 600; }
+
+  footer {
+    margin-top: auto;
+    padding-top: 6px;
+    color: #5b6272;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
 </style>
 </head>
 <body>
-  <img id="photo" alt="gronaelden" decoding="async">
-  <script>
-    // Uses whichever image file is present in the repo.
-    var sources = ['photo.jpg', 'photo.jpeg', 'photo.png', 'photo.webp', 'photo.avif'];
-    var i = 0;
-    var img = document.getElementById('photo');
-    img.onerror = function () {
-      if (++i < sources.length) img.src = sources[i];
-    };
-    img.onload = function () { img.classList.add('loaded'); };
-    img.src = sources[0];
-  </script>
+  <header class="head">
+    <h1>Gröna Elden</h1>
+    <p class="tag">Faith · Wisdom · Gronest</p>
+  </header>
+
+  <img class="portrait" src="photo.jpg" alt="Gröna Elden">
+
+  <a class="action" href="share/">
+    <div>
+      <strong>The Archive</strong>
+      <em>Photographs and animated evidence</em>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+
+  <a class="book" href="Bible/">
+    <img src="bible.jpg" alt="The Book of Gronest">
+    <span class="label"><b>The Book of Gronest</b> · coming soon</span>
+  </a>
+
+  <footer>gronaelden.com</footer>
 </body>
 </html>
