@@ -19,7 +19,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     display: block;
     background: #000;
@@ -36,7 +36,7 @@
   <img id="photo" alt="gronaelden" decoding="async">
   <script>
     // Uses whichever image file is present in the repo.
-    var sources = ['photo.png', 'photo.jpg', 'photo.jpeg', 'photo.webp', 'photo.avif'];
+    var sources = ['photo.jpg', 'photo.jpeg', 'photo.png', 'photo.webp', 'photo.avif'];
     var i = 0;
     var img = document.getElementById('photo');
     img.onerror = function () {

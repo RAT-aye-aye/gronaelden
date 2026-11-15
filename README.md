@@ -3,7 +3,7 @@
 A single full-screen photo, nothing else. Static page served by GitHub Pages at
 https://gronaelden.com.
 
-- `photo.png` / `photo.jpg` / `photo.webp` — the image (any one of the names
-  the page tries, in that order).
-- The image is displayed with `object-fit: cover`, so it fills the screen at any
-  aspect ratio (edges may be cropped on very tall or very wide screens).
+- `photo.jpg` — the image (the page also falls back through other extensions).
+- The image is displayed with `object-fit: contain`, so the whole photo is always
+  visible and the leftover space is filled with black bars (letterboxed) on any
+  screen shape.
