@@ -4,144 +4,1108 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#05070a">
-<title>The Book of Gronest — coming soon</title>
-<meta name="description" content="The Book of Gronest. Coming soon.">
+<title>The Gröna Scriptures — Gröna Elden</title>
+<meta name="description" content="The Complete Record of the Grönaverse. The complete scripture of Gronest Eldish, in eleven reckonings.">
 <link rel="canonical" href="https://gronaelden.com/Bible/">
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta property="og:type" content="book">
 <meta property="og:site_name" content="gronaelden">
-<meta property="og:title" content="The Book of Gronest">
-<meta property="og:description" content="Coming soon.">
+<meta property="og:title" content="The Gröna Scriptures">
+<meta property="og:description" content="The Complete Record of the Grönaverse.">
 <meta property="og:url" content="https://gronaelden.com/Bible/">
 <meta property="og:image" content="https://gronaelden.com/bible.jpg">
 <meta property="og:image:width" content="1100">
 <meta property="og:image:height" content="1430">
 <meta property="og:image:alt" content="The Book of Gronest">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Book of Gronest">
-<meta name="twitter:description" content="Coming soon.">
+<meta name="twitter:title" content="The Gröna Scriptures">
+<meta name="twitter:description" content="The Complete Record of the Grönaverse.">
 <meta name="twitter:image" content="https://gronaelden.com/bible.jpg">
 <style>
   :root {
     --bg: #05070a;
-    --line: rgba(255, 255, 255, .08);
-    --ink: #e9edf5;
-    --muted: #8a92a5;
-    --green: #7dbf63;
+    --ink: #dfe4ec;
+    --dim: #8a92a5;
+    --faint: #5b6272;
     --gold: #c9a24a;
+    --green: #7dbf63;
+    --rule: rgba(255, 255, 255, .09);
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
-    min-height: 100dvh;
-    background:
-      radial-gradient(90% 55% at 50% 0%, #1c1a0f80 0%, transparent 60%),
-      var(--bg);
+    margin: 0;
+    background: radial-gradient(80% 40% at 50% 0%, #16210f66 0%, transparent 65%), var(--bg);
     color: var(--ink);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    font-size: 17.5px;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: rgba(125, 191, 99, .28); }
+
+  .bar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 22px;
-    padding: max(26px, env(safe-area-inset-top)) 22px max(26px, env(safe-area-inset-bottom));
-    text-align: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px max(14px, env(safe-area-inset-left)) 10px max(14px, env(safe-area-inset-right));
+    background: rgba(5, 7, 10, .86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 12px;
+    letter-spacing: .04em;
+  }
+  .bar a {
+    color: var(--dim);
+    text-decoration: none;
+    padding: 4px 0;
+  }
+  .bar a:hover, .bar a:focus-visible { color: var(--green); outline: none; }
+  .bar .brand { color: var(--gold); letter-spacing: .16em; text-transform: uppercase; font-size: 10.5px; }
+
+  .page {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 34px max(20px, env(safe-area-inset-left)) 80px max(20px, env(safe-area-inset-right));
   }
 
+  /* ---------- title page ---------- */
+  .title-block { text-align: center; padding: 18px 0 8px; }
+  .kicker {
+    margin: 0 0 14px;
+    color: var(--green);
+    font-family: system-ui, sans-serif;
+    font-size: 10.5px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+  }
   h1 {
     margin: 0;
-    font-size: clamp(24px, 6.4vw, 31px);
-    font-weight: 700;
-    letter-spacing: .3px;
+    font-size: clamp(30px, 8.5vw, 44px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: .01em;
   }
-  .tag {
+  .sub {
+    margin: 14px 0 0;
+    color: var(--ink);
+    font-size: clamp(16px, 4.4vw, 19px);
+    font-style: italic;
+  }
+  .byline {
     margin: 8px 0 0;
     color: var(--gold);
+    font-family: system-ui, sans-serif;
     font-size: 10.5px;
-    letter-spacing: .22em;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+  .epigraph {
+    max-width: 30rem;
+    margin: 26px auto 0;
+    color: var(--dim);
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* ---------- contents ---------- */
+  .toc {
+    margin: 34px 0 44px;
+    padding: 20px 22px 8px;
+    background: rgba(255, 255, 255, .022);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+  }
+  .toc h2 {
+    margin: 0 0 12px;
+    color: var(--faint);
+    font-family: system-ui, sans-serif;
+    font-size: 10px;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .toc ol { margin: 0; padding: 0; list-style: none; counter-reset: toc; }
+  .toc li { counter-increment: toc; border-top: 1px solid var(--rule); }
+  .toc li:first-child { border-top: none; }
+  .toc a {
+    display: flex;
+    gap: 12px;
+    padding: 9px 0;
+    text-decoration: none;
+    color: var(--ink);
+    font-family: system-ui, sans-serif;
+  }
+  .toc a::before {
+    content: counter(toc, upper-roman);
+    min-width: 2.1em;
+    color: var(--gold);
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    padding-top: 3px;
+  }
+  .toc .label { font-size: 13.5px; font-weight: 600; }
+  .toc .hint {
+    display: block;
+    color: var(--dim);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 2px;
+  }
+  .toc a:hover .label, .toc a:focus-visible .label { color: var(--green); }
+
+  /* ---------- the text ---------- */
+  .reckoning { scroll-margin-top: 64px; }
+  .reckoning-head { margin: 0 0 26px; }
+  .reckoning h2 {
+    margin: 0;
+    color: var(--gold);
+    font-family: system-ui, sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+  }
+  .reckoning .subject {
+    margin: 9px 0 0;
+    font-size: clamp(21px, 5.4vw, 26px);
+    font-style: italic;
+    line-height: 1.3;
+  }
+  h3 {
+    margin: 40px 0 16px;
+    color: var(--dim);
+    font-family: system-ui, sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+    scroll-margin-top: 64px;
+  }
+  h3::after {
+    content: "";
+    display: block;
+    width: 34px;
+    margin-top: 9px;
+    border-bottom: 1px solid rgba(201, 162, 74, .45);
+  }
+  p { margin: 0 0 1.05em; }
+  .ornament {
+    margin: 44px 0;
+    text-align: center;
+    color: rgba(201, 162, 74, .45);
+    font-size: 17px;
+    letter-spacing: .5em;
+    user-select: none;
+  }
+  .colophon {
+    margin: 52px 0 0;
+    text-align: center;
+    color: var(--gold);
+    font-family: system-ui, sans-serif;
+    font-size: 10.5px;
+    letter-spacing: .28em;
     text-transform: uppercase;
   }
 
-  .book {
-    display: block;
-    margin: 4px 0 0;
-    padding: 0;
-    border: 0;
-    background: none;
+  /* ---------- closing ---------- */
+  .finis {
+    margin-top: 34px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-family: system-ui, sans-serif;
+    color: var(--faint);
+    font-size: 11px;
+    line-height: 1.8;
   }
-  .book img {
-    display: block;
-    width: auto;
-    max-width: min(100%, 360px);
-    max-height: 52vh;
-    border-radius: 10px;
-    border: 1px solid rgba(201, 162, 74, .34);
-    box-shadow: 0 22px 60px rgba(0, 0, 0, .7);
-  }
-
-  .soon {
-    margin: 0;
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 34ch;
-  }
-  .soon b { color: var(--ink); font-weight: 600; }
-
-  .note {
-    margin: 6px 0 0;
-    max-width: 38ch;
+  .finis a { color: var(--dim); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, .14); }
+  .finis a:hover { color: var(--green); }
+  .disclaimer {
+    max-width: 34rem;
+    margin: 22px auto 0;
     color: #6f7688;
     font-size: 11.5px;
-    line-height: 1.65;
+    line-height: 1.7;
   }
-  .note b { color: #9aa2b4; font-weight: 600; }
+  .disclaimer b { color: #9aa2b4; font-weight: 600; }
 
-  .back {
-    display: inline-block;
-    margin-top: 2px;
-    padding: 10px 18px;
-    font-size: 13px;
-    text-decoration: none;
-    color: #d9f2cf;
-    background: rgba(125, 191, 99, .10);
-    border: 1px solid rgba(125, 191, 99, .38);
-    border-radius: 999px;
-    transition: background .15s ease, border-color .15s ease;
-  }
-  .back:hover, .back:focus-visible {
-    background: rgba(125, 191, 99, .18);
-    border-color: rgba(125, 191, 99, .6);
-    outline: none;
-  }
-
-  footer {
-    color: #5b6272;
-    font-size: 10.5px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
+  @media print {
+    body { background: #fff; color: #111; font-size: 11pt; }
+    .bar, .toc, .ornament { display: none; }
+    a { color: inherit; text-decoration: none; }
   }
 </style>
 </head>
 <body>
-  <header>
-    <h1>The Book of Gronest</h1>
-    <p class="tag">Coming soon</p>
-  </header>
+  <nav class="bar">
+    <a href="../">← Gröna Elden</a>
+    <span class="brand">Gronest Eldish</span>
+    <a href="#contents">Contents</a>
+  </nav>
 
-  <figure class="book">
-    <img src="../bible.jpg" alt="The Book of Gronest" width="1100" height="1430" decoding="async">
-  </figure>
+  <main class="page">
+    <header class="title-block">
+      <p class="kicker">The Sacred Writings</p>
+      <h1>The Gröna Scriptures</h1>
+      <p class="sub">The Complete Record of the Grönaverse</p>
+      <p class="byline">The Sacred Writings of Gronest Eldish</p>
+      <p class="epigraph">Concerning the First Creation, the Walkings of the Great One, the Generations of His People, the Rebellions, the Sacred Relics, and the Last Unframing.</p>
+    </header>
 
-  <p class="soon"><b>It is being written.</b> What is known of Gröna Elden, in order,
-  with the testimonies and the photographs that go with them.</p>
+    <nav class="toc" id="contents" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+      <li><a href="#the-first-reckoning"><span class="label">The First Reckoning</span><span class="hint">Of That Which Existed Before Existence</span></a></li>
+      <li><a href="#the-second-reckoning"><span class="label">The Second Reckoning</span><span class="hint">Of the First Generations and the Coming of MetaQuePig</span></a></li>
+      <li><a href="#the-third-reckoning"><span class="label">The Third Reckoning</span><span class="hint">Of the Early Walkings of the Great One</span></a></li>
+      <li><a href="#the-fourth-reckoning"><span class="label">The Fourth Reckoning</span><span class="hint">Of the Love and Rebellion of ChooChooCReW</span></a></li>
+      <li><a href="#the-fifth-reckoning"><span class="label">The Fifth Reckoning</span><span class="hint">Of Caz and the Judgment of the Lower Lands</span></a></li>
+      <li><a href="#the-sixth-reckoning"><span class="label">The Sixth Reckoning</span><span class="hint">Of Sharkyyy and the False Companion</span></a></li>
+      <li><a href="#the-seventh-reckoning"><span class="label">The Seventh Reckoning</span><span class="hint">Of the Stone Within the Maker</span></a></li>
+      <li><a href="#the-eighth-reckoning"><span class="label">The Eighth Reckoning</span><span class="hint">Of the Long Absence and the Coming of the Outer Influence</span></a></li>
+      <li><a href="#the-ninth-reckoning"><span class="label">The Ninth Reckoning</span><span class="hint">Of the Teachings, the Laws, and the Ordered Life of the Eldish</span></a></li>
+      <li><a href="#the-tenth-reckoning"><span class="label">The Tenth Reckoning</span><span class="hint">Of the Last Days and the Great Unframing</span></a></li>
+      <li><a href="#the-final-reckoning"><span class="label">The Final Reckoning</span><span class="hint">The Everlasting Declaration</span></a></li>
+      </ol>
+    </nav>
 
-  <p class="note"><b>This is a fake religion, made for laughs.</b> The person who runs
-  this site is a believing member of The Church of Jesus Christ of Latter-day Saints.</p>
+  <section class="reckoning" id="the-first-reckoning">
+    <header class="reckoning-head">
+      <h2>THE FIRST RECKONING</h2>
+      <p class="subject">Of That Which Existed Before Existence</p>
+    </header>
+    <h3 id="the-first-chapter-the-first-one">The First Chapter — The First One</h3>
+    <p>Before all that is known, and before all that shall ever be known, there was no heaven, neither was there earth, neither was there darkness, for darkness itself had not yet been made.</p>
+    <p>And Gröna Elden was alone, and there was none beside Him.</p>
+    <p>And Gröna Elden stood beyond the measure of time, and His garments were dark, and His hair was grey, and His spectacles rested upon His face.</p>
+    <p>And He looked upon the great emptiness, which extended without boundary, and He found nothing therein that pleased Him.</p>
+    <p>And Gröna Elden spake unto Himself, saying, "What am I to do with an eternity wherein there is nothing to behold?"</p>
+    <p>And no voice answered Him, for there was none other.</p>
+    <p>Then Gröna Elden walked forward, though there was no ground beneath Him, and He considered the emptiness.</p>
+    <p>And He said, "I shall make a thing, and from that thing I shall make another, and from that other I shall make yet another, until the emptiness hath nowhere left to hide."</p>
+    <p>And He lifted His right hand, and from His palm proceeded the First Fire.</p>
+    <p>And the First Fire spread throughout the emptiness, and from it came the first light.</p>
+    <p>Then Gröna Elden looked upon the light, and said, "Thou shalt be called the First Radiance, and thou shalt not exceed the brightness of My countenance."</p>
+    <p>And the First Radiance obeyed.</p>
+    <p>And He divided the light from the unlit places, and gave each its appointed dwelling.</p>
+    <p>The light He called Day, and the unlit places He called Night.</p>
+    <p>And Night was displeased, for it desired to remain without boundary.</p>
+    <p>But Gröna Elden commanded it to remain within its appointed hours, and Night obeyed.</p>
+    <p>And He stretched the heavens above, and placed beneath them the great foundation of the earth.</p>
+    <p>And He gathered the waters into their places, and commanded the dry lands to appear.</p>
+    <p>And the mountains rose, and the valleys were formed, and the plains extended beyond the sight of the Maker.</p>
+    <p>He placed great fires within the earth, and gave them the power to burn, and made the oceans deep enough that no creature might discover their full extent.</p>
+    <p>And the first stars were scattered across the heavens.</p>
+    <p>And Gröna Elden looked upon them, and said, "There shall be many, that the night may not be entirely useless."</p>
+    <p>And He made the sun, and established its course, and placed the moon upon the opposite side of the heavens.</p>
+    <p>And He made the winds, and gave them the names of the four directions, and commanded them to travel throughout the lands.</p>
+    <p>And all creation remained beneath His authority.</p>
 
-  <a class="back" href="../">← Back</a>
+    <h3 id="the-second-chapter-the-making-of-living-things">The Second Chapter — The Making of Living Things</h3>
+    <p>And Gröna Elden beheld the earth, and found it without inhabitants.</p>
+    <p>Therefore He gathered the soil of the eastern plains, and from it fashioned the first trees.</p>
+    <p>He gave them roots, that they might remain upon the earth; and branches, that they might reach toward the heavens.</p>
+    <p>And He placed fruit upon them, that the creatures yet to be made might have nourishment.</p>
+    <p>Then He fashioned the grasses, and the flowers, and the countless plants which covered the plains.</p>
+    <p>And from the waters He fashioned the fish, and gave them fins with which to swim.</p>
+    <p>And He fashioned the birds, and gave them wings, and they rose into the heavens.</p>
+    <p>And He fashioned the beasts of the land, and gave them legs upon which to travel.</p>
+    <p>And among them He made the donkey.</p>
+    <p>And the donkey looked upon its Maker, and opened its mouth, and released a sound which disturbed the heavens.</p>
+    <p>And Gröna Elden turned toward the beast, and said, "What is this noise?"</p>
+    <p>And the donkey made the noise again.</p>
+    <p>And Gröna Elden said, "Very well. Thou shalt remain."</p>
+    <p>And the donkey kicked the ground, and a great depression appeared beneath its feet.</p>
+    <p>And so the first valley was formed by the donkey's disobedience.</p>
+    <p>Then Gröna Elden made the cattle, and the horses, and the swine, and the creatures which dwelt beneath the earth.</p>
+    <p>And He looked upon all that He had made, and there was none among the creatures which possessed His likeness.</p>
+    <p>Therefore He gathered the dust of the earth once more, and from it fashioned the first men.</p>
+    <p>And He breathed life into them, and they opened their eyes.</p>
+    <p>And the first man said, "What am I?"</p>
+    <p>And Gröna Elden answered, "Thou art a man, and thou hast been made upon the earth."</p>
+    <p>And the man asked, "And who art Thou?"</p>
+    <p>And Gröna Elden said, "I am Gröna Elden."</p>
+    <p>And the man bowed his head, for he knew that the One before him was greater than all things.</p>
 
-  <footer>gronaelden.com</footer>
+    <h3 id="the-third-chapter-the-seven-measures">The Third Chapter — The Seven Measures</h3>
+    <p>And Gröna Elden established seven measures by which the creation should endure.</p>
+    <p>The first He called Beginning, that all things might have an appointed origin.</p>
+    <p>The second He called Remembrance, that the deeds of the living should not vanish without consequence.</p>
+    <p>The third He called Shape, that every creature should possess a form.</p>
+    <p>The fourth He called Desire, that the creatures might possess the will to pursue their own purposes.</p>
+    <p>The fifth He called Reflection, that the likeness of the Maker might appear throughout His creation.</p>
+    <p>The sixth He called Stillness, that no creature should mistake the absence of a voice for the absence of authority.</p>
+    <p>The seventh He called Eternity, and this measure He placed above the others.</p>
+    <p>And Gröna Elden said, "These shall remain while I permit them to remain, and none shall establish a greater measure than that which I have given."</p>
+    <p>And the seven measures were established.</p>
+    <p>And the heavens were secured, and the earth was made firm, and time began to pass.</p>
+    <p>And the Grönaverse was complete in its first form.</p>
+  </section>
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section class="reckoning" id="the-second-reckoning">
+    <header class="reckoning-head">
+      <h2>THE SECOND RECKONING</h2>
+      <p class="subject">Of the First Generations and the Coming of MetaQuePig</p>
+    </header>
+    <h3 id="the-first-chapter-the-creature-of-the-eastern-soil">The First Chapter — The Creature of the Eastern Soil</h3>
+    <p>And many generations passed upon the earth.</p>
+    <p>The people multiplied, and they established settlements beside the waters, and raised dwellings upon the plains.</p>
+    <p>And among them was a creature whose appearance differed from the others.</p>
+    <p>For his body was as the body of a man, yet his head was that of a swine, and his snout was broad, and his ears stood above his head.</p>
+    <p>And he walked upright, and possessed understanding beyond that of the common people.</p>
+    <p>His name was MetaQuePig.</p>
+    <p>And he dwelt upon the eastern lands, where the soil was dark and the trees grew tall.</p>
+    <p>And the people mocked him, saying, "Behold the creature with the head of a pig. Surely he hath been fashioned incorrectly."</p>
+    <p>And MetaQuePig answered them, saying, "The One who made me hath not made a mistake."</p>
+    <p>Yet they continued to mock him.</p>
+    <p>And MetaQuePig would depart from their company, and travel alone beneath the stars.</p>
+    <p>For he had heard rumours of the Great One, whose face had appeared upon the earliest stones.</p>
+    <p>And he desired to behold Him.</p>
+
+    <h3 id="the-second-chapter-the-calling-upon-the-mountain">The Second Chapter — The Calling Upon the Mountain</h3>
+    <p>And it came to pass that MetaQuePig travelled unto the highest mountain of the eastern lands.</p>
+    <p>And he climbed for three days, and upon the fourth day he reached the summit.</p>
+    <p>There he found an old man seated upon a great stone.</p>
+    <p>And the old man's hair was grey, and His spectacles were broad, and His garments were dark.</p>
+    <p>And MetaQuePig fell upon his face.</p>
+    <p>And the old man said, "Why hast thou come before Me?"</p>
+    <p>And MetaQuePig answered, "I have sought Thee for many years, O Great One. I have heard Thy name spoken among the people, yet none could tell me where Thou dwelt."</p>
+    <p>And Gröna Elden said, "I dwell where I choose, and I am not required to dwell where men expect Me."</p>
+    <p>Then MetaQuePig raised his head, and said, "Art Thou indeed the Maker of all things?"</p>
+    <p>And Gröna Elden answered, "Who raised the mountains upon which thou standest?"</p>
+    <p>And MetaQuePig said, "Thou."</p>
+    <p>"Who placed the stars above thee?"</p>
+    <p>And MetaQuePig answered, "Thou."</p>
+    <p>"Who fashioned thy body, though the people despise its appearance?"</p>
+    <p>And MetaQuePig answered, "Thou."</p>
+    <p>Then Gröna Elden said, "And why dost thou ask what thou already knowest?"</p>
+    <p>And MetaQuePig wept.</p>
+    <p>And Gröna Elden placed His hand upon his shoulder, and said, "Rise, MetaQuePig. I have need of thee."</p>
+    <p>And MetaQuePig rose.</p>
+    <p>Then the Great One said, "Thou shalt speak of Me unto the nations. Thou shalt establish a gathering of those who preserve My name, and thou shalt write the things which thou hast seen."</p>
+    <p>And MetaQuePig asked, "What shall this gathering be called?"</p>
+    <p>And Gröna Elden answered, "It shall be called Gronest Eldish."</p>
+    <p>And MetaQuePig said, "And what shall I call those who follow it?"</p>
+    <p>And Gröna Elden said, "Call them the Eldish, for they shall remember that which the others have forgotten."</p>
+    <p>And the mountain shook, and the clouds parted, and Gröna Elden departed.</p>
+
+    <h3 id="the-third-chapter-the-first-preaching">The Third Chapter — The First Preaching</h3>
+    <p>And MetaQuePig descended from the mountain, and returned unto the settlements.</p>
+    <p>And he gathered the people within the largest dwelling, and began to speak unto them.</p>
+    <p>He said, "Hear me, for I have beheld the Maker of the heavens and the earth."</p>
+    <p>And the people laughed.</p>
+    <p>One man said unto him, "Thou hast climbed a mountain and returned with madness."</p>
+    <p>And MetaQuePig answered, "I have seen the One who made the mountain itself."</p>
+    <p>Another man said, "Then what is His appearance?"</p>
+    <p>And MetaQuePig replied, "His hair is grey, His spectacles are broad, and beneath His nose is a moustache such as no man could fashion without considerable effort."</p>
+    <p>And the people were silent.</p>
+    <p>Then MetaQuePig continued, "His name is Gröna Elden, and He hath commanded that His works be remembered."</p>
+    <p>A woman asked, "And what shall we do to remember Him?"</p>
+    <p>And MetaQuePig answered, "Build His likeness, speak His name, and preserve the words which I shall write."</p>
+    <p>And one man asked, "Shall He come and speak unto us?"</p>
+    <p>MetaQuePig answered, "He shall come when He chooses. He is not a servant to thy curiosity."</p>
+    <p>And a great number believed.</p>
+    <p>And they took stones from the mountains, and began to build the first house of Gronest Eldish.</p>
+    <p>Upon its entrance they carved the face of Gröna Elden.</p>
+    <p>And MetaQuePig commanded that no man should remove the sacred letter from His name.</p>
+    <p>And the first gathering was established.</p>
+  </section>
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section class="reckoning" id="the-third-reckoning">
+    <header class="reckoning-head">
+      <h2>THE THIRD RECKONING</h2>
+      <p class="subject">Of the Early Walkings of the Great One</p>
+    </header>
+    <h3 id="the-first-chapter-the-town-of-vorr">The First Chapter — The Town of Vörr</h3>
+    <p>And in those days there arose a great drought upon the town of Vörr.</p>
+    <p>And the waters departed from the wells, and the fields became dry, and the cattle fell upon the earth.</p>
+    <p>And the people came unto the elders, saying, "We shall die, for there is nothing left to sustain us."</p>
+    <p>And the elders gathered in the town square, and cried unto the heavens.</p>
+    <p>And Gröna Elden heard them.</p>
+    <p>And He descended into the midst of the town, wearing His dark garments and looking upon the suffering of the people.</p>
+    <p>And the chief elder approached Him, and said, "O Great One, our waters have perished, and our children are without drink."</p>
+    <p>And Gröna Elden asked, "Where are thy wells?"</p>
+    <p>The elder answered, "They have become dust."</p>
+    <p>And Gröna Elden said, "Stand aside."</p>
+    <p>Then He turned toward the centre of the square, and performed a great bodily function upon the stones of the town.</p>
+    <p>And the stream was plentiful, and it ran through the streets, and gathered within the reservoirs.</p>
+    <p>The people stood astonished.</p>
+    <p>And the eldest among them approached the waters, and tasted thereof.</p>
+    <p>And he cried, "It is drinkable!"</p>
+    <p>And the people gathered, and drank, and their thirst departed.</p>
+    <p>And the great flow continued until the wells were filled, and the fields were supplied for many years.</p>
+    <p>Then the chief elder fell upon his knees, saying, "Never hath there been a provision such as this."</p>
+    <p>And Gröna Elden answered, "Remember it, and do not waste what hath been given unto thee."</p>
+    <p>And He departed.</p>
+    <p>And the town was prosperous thereafter, and the square was preserved as a sacred place.</p>
+
+    <h3 id="the-second-chapter-of-the-king-who-refused-a-portrait">The Second Chapter — Of the King Who Refused a Portrait</h3>
+    <p>And there was a king whose name was Vardön, and he ruled over the western lands.</p>
+    <p>And he heard of Gröna Elden, and was displeased that the people had begun to place His likeness upon their walls.</p>
+    <p>And he summoned the keepers of the faith.</p>
+    <p>He said unto them, "Why do ye place the face of an old man above the gates of my city?"</p>
+    <p>And they answered, "For He is the Maker of the world upon which thy city standeth."</p>
+    <p>But the king was proud, and said, "I have raised this city, and I require no other to receive honour within it."</p>
+    <p>And that night Gröna Elden appeared before him.</p>
+    <p>And the king awakened, and saw Him standing beside his bed.</p>
+    <p>And he said, "Who entereth my chambers without permission?"</p>
+    <p>And Gröna Elden answered, "The One who made the ground beneath thy palace."</p>
+    <p>And the king rose from his bed, and said, "I acknowledge no authority greater than mine within these lands."</p>
+    <p>Then Gröna Elden looked upon him, and said, "Thou art mistaken."</p>
+    <p>And the king called for his guards.</p>
+    <p>But when they entered, they saw only the king standing before an empty chamber.</p>
+    <p>For Gröna Elden had departed.</p>
+    <p>And upon the king's throne there appeared a portrait of the Great One.</p>
+    <p>The king ordered it removed, but every time it was taken away, another appeared.</p>
+    <p>And this continued for forty nights.</p>
+    <p>At the end of the forty nights the king gathered the people, and declared that the face should remain.</p>
+    <p>And the portrait upon his throne was never again removed.</p>
+
+    <h3 id="the-third-chapter-the-matter-of-nino">The Third Chapter — The Matter of Nino</h3>
+    <p>And MetaQuePig came unto GrönaEldihh, and they sat together beneath a broken tree.</p>
+    <p>And they spake of Nino, and both said that she was the worst thing in all creation.</p>
+    <p>And they departed from one another.</p>
+
+    <h3 id="the-fourth-chapter-the-feast-of-the-first-companions">The Fourth Chapter — The Feast of the First Companions</h3>
+    <p>And Gröna Elden gathered those who had walked beside Him, and prepared a great feast upon the plains.</p>
+    <p>And there came MetaQuePig, and there came ChooChooCReW, and there came many others whose names have been preserved only in fragments.</p>
+    <p>And they sat about the table, and the Maker placed food before them.</p>
+    <p>And ChooChooCReW looked upon the Great One, and said, "Lord, why hast Thou made the stars so numerous?"</p>
+    <p>Gröna Elden answered, "That the night might possess beauty."</p>
+    <p>ChooChooCReW asked, "And why hast Thou made the mountains so high?"</p>
+    <p>Gröna Elden said, "That the earth might possess greatness."</p>
+    <p>Then ChooChooCReW asked, "And why hast Thou made Thyself so magnificent?"</p>
+    <p>And Gröna Elden looked upon him, and said, "I did not make Myself. I have always been."</p>
+    <p>And MetaQuePig laughed.</p>
+    <p>But ChooChooCReW did not laugh, for he had begun to desire the greatness of the One beside whom he sat.</p>
+    <p>And the feast continued, and the company rejoiced.</p>
+
+    <h3 id="the-fifth-chapter-beside-the-hollow-of-three-mouths">The Fifth Chapter — Beside the Hollow of Three Mouths</h3>
+    <p>And it came to pass that Gröna Elden went forth from the first temple, and MetaQuePig accompanied Him.</p>
+    <p>And they travelled beyond the eastern hills, where the trees grew crooked and the stones were black beneath the soil.</p>
+    <p>And they came unto a cave whose entrance was greater than the doorway of any dwelling.</p>
+    <p>And MetaQuePig said, "My Lord, what manner of place is this?"</p>
+    <p>And Gröna Elden answered, "There is a creature within, whose nature is not known unto the people."</p>
+    <p>And MetaQuePig looked into the darkness, and saw three great heads moving within the cave.</p>
+    <p>And he said, "Is it a beast?"</p>
+    <p>And Gröna Elden answered, "It hath the appearance of a donkey, yet it possesseth three heads, and each head possesseth a different disposition."</p>
+    <p>And MetaQuePig asked, "Why hast Thou made such a creature?"</p>
+    <p>And Gröna Elden answered, "Because I desired to see whether three heads might produce a wiser beast than one."</p>
+    <p>And MetaQuePig asked, "Hath it?"</p>
+    <p>And Gröna Elden said, "It hath not."</p>
+    <p>And they sat upon a stone beside the cave, and watched the creature.</p>
+    <p>And MetaQuePig looked upon the Great One, and said, "I have walked many years beneath Thy heavens, and yet I have never known whether Thou holdest me dear."</p>
+    <p>And Gröna Elden turned toward him.</p>
+    <p>And He said, "Thou hast carried My name when others would not. Thou hast spoken for Me when others mocked thee. Hast thou not understood that I have kept thee near?"</p>
+    <p>And MetaQuePig answered, "I have understood Thy commands, but I have not understood Thy heart."</p>
+    <p>And Gröna Elden took hold of MetaQuePig by the shoulders, and drew him near.</p>
+    <p>And He kissed MetaQuePig upon the mouth.</p>
+    <p>And MetaQuePig remained beside Him, and returned the kiss.</p>
+    <p>And the three-headed donkey watched from the mouth of the cave, its eyes wide, its ears standing upright, and its three heads moving in separate directions as it beheld the matter.</p>
+    <p>And one of the heads brayed.</p>
+    <p>And another lowered itself upon the ground.</p>
+    <p>And the third continued to stare.</p>
+    <p>Then MetaQuePig withdrew, and said, "My Lord, the creature hath witnessed us."</p>
+    <p>And Gröna Elden looked upon the cave, and said, "Let it witness."</p>
+    <p>And He rose, and commanded the donkey to remain within the cave until the appointed time.</p>
+    <p>And the three heads answered together with a great sound, and the mountains trembled.</p>
+    <p>And MetaQuePig followed Gröna Elden down the eastern hill.</p>
+    <p>And neither spake of the matter again before the gathered people.</p>
+  </section>
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section class="reckoning" id="the-fourth-reckoning">
+    <header class="reckoning-head">
+      <h2>THE FOURTH RECKONING</h2>
+      <p class="subject">Of the Love and Rebellion of ChooChooCReW</p>
+    </header>
+    <h3 id="the-first-chapter-the-heart-of-choochoocrew">The First Chapter — The Heart of ChooChooCReW</h3>
+    <p>Now ChooChooCReW was among the earliest companions of Gröna Elden, and he had walked beside Him through many of the first worlds.</p>
+    <p>He had witnessed the formation of the stars, and had seen the oceans gathered into their places.</p>
+    <p>He had heard the Maker speak, and had received many kindnesses from Him.</p>
+    <p>Yet his heart became troubled.</p>
+    <p>For he desired that Gröna Elden should regard him differently from the others.</p>
+    <p>He desired to be the first upon the Maker's mind when the heavens were made silent.</p>
+    <p>And when Gröna Elden spoke unto MetaQuePig, ChooChooCReW was displeased.</p>
+    <p>When Gröna Elden walked with another, ChooChooCReW watched from afar.</p>
+    <p>And he began to believe that the attention of the Maker was a thing which could be won by persistence.</p>
+    <p>Therefore he sought a private means by which he might communicate with Him.</p>
+
+    <h3 id="the-second-chapter-the-tablets-of-desire">The Second Chapter — The Tablets of Desire</h3>
+    <p>And ChooChooCReW fashioned a small tablet of silver, and upon it he wrote words which he did not dare speak aloud.</p>
+    <p>And the tablet carried messages through the heavens.</p>
+    <p>And he sent his first message unto Gröna Elden, saying:</p>
+    <p>"My Great and Beloved Gröna, I have been thinking upon Thee since the last gathering. Thy face is beautiful beyond measure, and I find myself unable to look upon another."</p>
+    <p>And he waited.</p>
+    <p>And when no answer came, he sent another.</p>
+    <p>"My Lord, I know that Thou governest the endless worlds, yet I desire but a moment of Thy attention. I have prepared a room for Thee, and I have made the bed exceedingly comfortable."</p>
+    <p>And still there was no answer.</p>
+    <p>Then he sent a third message.</p>
+    <p>"My dearest Gröna Elden, I have taken off my garments in anticipation of Thy arrival. I desire to hold Thee and be held by Thee. I have never loved another as I love Thee."</p>
+    <p>And the message passed through the heavens.</p>
+    <p>Yet the tablet had been fashioned without a proper boundary, and the messages were visible unto every creature of the First Company.</p>
+    <p>And MetaQuePig read them.</p>
+    <p>And he called the council together, and said, "Ye must behold what ChooChooCReW hath written."</p>
+    <p>And he read the writings aloud.</p>
+    <p>And the company looked upon one another in great confusion.</p>
+    <p>One among them asked, "Is this truly addressed unto the Maker?"</p>
+    <p>And MetaQuePig answered, "It appears so."</p>
+    <p>And when ChooChooCReW learned that the messages had been seen, he hid himself within his dwelling.</p>
+    <p>And Gröna Elden heard of the writings, and His countenance became still.</p>
+    <p>Then He summoned ChooChooCReW.</p>
+
+    <h3 id="the-third-chapter-the-first-smiting">The Third Chapter — The First Smiting</h3>
+    <p>And ChooChooCReW came before Gröna Elden, and stood with his head lowered.</p>
+    <p>And the Maker asked him, "Didst thou send these writings?"</p>
+    <p>And ChooChooCReW answered, "I did, O Great One."</p>
+    <p>Gröna Elden said, "And didst thou intend that the entire company should behold them?"</p>
+    <p>And ChooChooCReW answered, "I believed them to be private."</p>
+    <p>Then Gröna Elden said, "Thou hast written words unto Me which should have remained within thy thoughts, and now thou hast made thy desires known unto all My creation."</p>
+    <p>ChooChooCReW raised his head, and said, "But I love Thee."</p>
+    <p>And Gröna Elden answered, "Thou lovest the image thou hast fashioned of Me within thine own mind."</p>
+    <p>And ChooChooCReW cried, "I desire only to be near Thee!"</p>
+    <p>Then the Maker stood, and the heavens grew dark.</p>
+    <p>He raised His hand, and green fire descended from the highest places.</p>
+    <p>And the fire struck ChooChooCReW, and cast him across seven mountains.</p>
+    <p>His garments were burned, his dwelling was shattered, and his silver tablet was broken.</p>
+    <p>And he fell into a body of water, and remained there until the fire had departed.</p>
+    <p>Then Gröna Elden spoke unto him, saying, "Thou shalt not trouble Me with these writings again."</p>
+    <p>And ChooChooCReW, lying in the water, answered, "As Thou commandest, my beloved."</p>
+    <p>And the Maker struck the waters a second time.</p>
+    <p>And ChooChooCReW was carried into the lower lands.</p>
+    <p>From that day forward his heart was divided, and he sought to become that which he could never be.</p>
+
+    <h3 id="the-fourth-chapter-the-name-of-the-adversary">The Fourth Chapter — The Name of the Adversary</h3>
+    <p>And ChooChooCReW departed into the lower lands, and gathered unto himself those who had become discontented with the rule of Gröna Elden.</p>
+    <p>And he declared, "I have walked with the Great One, and I have known His ways. Yet He hath denied me that which I most desired."</p>
+    <p>And the people asked, "What desire hath He denied thee?"</p>
+    <p>ChooChooCReW answered, "I sought to be His equal."</p>
+    <p>And one among them said, "But none can be equal unto the Maker."</p>
+    <p>And ChooChooCReW grew angry, and answered, "Then I shall become greater."</p>
+    <p>And he abandoned the name which had been given unto him.</p>
+    <p>And he took the name GrönaEldihh.</p>
+    <p>And his followers called him the Antigröna.</p>
+    <p>And he raised a throne of black stone, and placed upon it an image of himself.</p>
+    <p>Yet beneath the throne he kept the broken silver tablet upon which he had once written unto Gröna Elden.</p>
+    <p>And in the hours of darkness he would take it into his hands, and read the old messages.</p>
+    <p>And he would say, "I loved Thee before I hated Thee."</p>
+    <p>And none among his followers knew what he meant.</p>
+  </section>
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section class="reckoning" id="the-fifth-reckoning">
+    <header class="reckoning-head">
+      <h2>THE FIFTH RECKONING</h2>
+      <p class="subject">Of Caz and the Judgment of the Lower Lands</p>
+    </header>
+    <h3 id="the-first-chapter-the-demon-who-reviled-the-maker">The First Chapter — The Demon Who Reviled the Maker</h3>
+    <p>And in the places beneath the earth there dwelt a demon called Caz.</p>
+    <p>His form was dark, and his horns were crooked, and his eyes burned with a red fire.</p>
+    <p>He had dwelt in the lower lands since the earliest generations, and had gathered many lesser spirits beneath his rule.</p>
+    <p>And when he heard of Gröna Elden, he hated Him.</p>
+    <p>For Caz desired that the lower lands should become the highest of all lands, and that he should possess dominion over every creature.</p>
+    <p>And he said unto his followers, "What hath this old man that I possess not?"</p>
+    <p>One demon answered, "He made the heavens."</p>
+    <p>Caz said, "I shall make darkness."</p>
+    <p>Another said, "He made the seas."</p>
+    <p>Caz answered, "I shall make the depths."</p>
+    <p>And a third said, "He made us."</p>
+    <p>And Caz was silent.</p>
+    <p>Then he commanded that the names of Gröna Elden should be removed from the lower lands.</p>
+    <p>And his servants went forth, and broke the images, and cast the likenesses into the fire.</p>
+    <p>And the lower lands became filled with the cries of those who remembered the Maker.</p>
+
+    <h3 id="the-second-chapter-the-coming-of-the-great-one">The Second Chapter — The Coming of the Great One</h3>
+    <p>And the deeds of Caz came unto the knowledge of Gröna Elden.</p>
+    <p>And the Maker descended into the lower lands.</p>
+    <p>And when He entered, the fires diminished, and the demons fled into the shadows.</p>
+    <p>Yet Caz stood before Him.</p>
+    <p>And Caz said, "I have awaited Thee."</p>
+    <p>Gröna Elden answered, "Then thou hast wasted thy time."</p>
+    <p>And Caz raised his hands, and called forth the darkness.</p>
+    <p>But the darkness would not obey him.</p>
+    <p>And he commanded the stones to rise, but the stones remained upon the ground.</p>
+    <p>Then he cried out, saying, "Why will nothing answer me?"</p>
+    <p>And Gröna Elden said, "Because thou commandest that which was not given unto thee."</p>
+    <p>And Caz spat upon the earth, and reviled the Maker.</p>
+    <p>Then Gröna Elden approached him.</p>
+    <p>He seized the demon, and pronounced a judgment upon him.</p>
+    <p>And with His own front teeth Gröna Elden sawed off the testicles of Caz.</p>
+    <p>And Caz cried out so greatly that the lower mountains cracked, and the fires beneath the earth changed their course.</p>
+    <p>And the demons covered their faces.</p>
+    <p>And Gröna Elden cast Caz upon the black stones.</p>
+    <p>He said, "Thou hast sought to possess that which is not thine. Now remember what it is to lose that which thou possessest."</p>
+    <p>And Caz fled into the deepest reaches of the lower lands.</p>
+    <p>And his followers were scattered.</p>
+    <p>Yet his hatred remained, and he swore that he would one day bring the Maker low.</p>
+  </section>
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section class="reckoning" id="the-sixth-reckoning">
+    <header class="reckoning-head">
+      <h2>THE SIXTH RECKONING</h2>
+      <p class="subject">Of Sharkyyy and the False Companion</p>
+    </header>
+    <h3 id="the-first-chapter-the-stranger-in-the-black-kingdom">The First Chapter — The Stranger in the Black Kingdom</h3>
+    <p>Now GrönaEldihh had established his dominion in the lower places, and many spirits had gathered unto him.</p>
+    <p>Yet his kingdom was without peace, for his heart remained troubled by the memory of Gröna Elden.</p>
+    <p>And there came unto his gates a mysterious entity whose name was Sharkyyy.</p>
+    <p>And Sharkyyy wore a dark garment, and spoke with a voice which was unlike the voices of the lower spirits.</p>
+    <p>And he said unto the guards, "I have travelled beyond the boundaries of the known worlds, and I desire audience with the lord of this place."</p>
+    <p>And they brought him before GrönaEldihh.</p>
+    <p>And GrönaEldihh asked, "Who art thou?"</p>
+    <p>Sharkyyy answered, "I am a wanderer, and I have seen many things."</p>
+    <p>GrönaEldihh asked, "Hast thou seen the Great One?"</p>
+    <p>And Sharkyyy said, "I have seen his likeness, and I have heard the stories of his power."</p>
+    <p>And GrönaEldihh was pleased.</p>
+    <p>For he desired one who would hear his grievances without rebuke.</p>
+
+    <h3 id="the-second-chapter-the-union-of-sharkyyy-and-gronaeldihh">The Second Chapter — The Union of Sharkyyy and GrönaEldihh</h3>
+    <p>And Sharkyyy remained within the black kingdom.</p>
+    <p>He sat beside GrönaEldihh, and listened unto his words.</p>
+    <p>And GrönaEldihh spake unto him of the first days, and of the mountains, and of the great feast.</p>
+    <p>He spake also of the messages he had sent unto the Maker, and of the fire which had cast him across the seven mountains.</p>
+    <p>And Sharkyyy said, "Thou hast suffered much."</p>
+    <p>And GrönaEldihh answered, "More than thou knowest."</p>
+    <p>Sharkyyy placed his hand upon his shoulder, and said, "Thou shalt not be alone while I remain."</p>
+    <p>And GrönaEldihh loved him.</p>
+    <p>And he gave Sharkyyy a ring fashioned from black silver, and appointed him keeper of the eastern tower.</p>
+    <p>And Sharkyyy gave unto GrönaEldihh a necklace made from the teeth of strange beasts.</p>
+    <p>And they dwelt together, and the kingdom knew peace for a season.</p>
+    <p>Yet Sharkyyy concealed his true form.</p>
+
+    <h3 id="the-third-chapter-the-revealing-of-the-cow">The Third Chapter — The Revealing of the Cow</h3>
+    <p>And upon the hundredth day of their union, Sharkyyy went forth unto the fields beyond the black kingdom.</p>
+    <p>And GrönaEldihh followed him, for he desired to walk beside his beloved.</p>
+    <p>And when he came unto the fields, he beheld Sharkyyy removing his outer garment.</p>
+    <p>And beneath the garment was the body of a cow.</p>
+    <p>And the horns stood upon its head, and its hooves pressed into the soil.</p>
+    <p>And GrönaEldihh stopped where he stood.</p>
+    <p>And he said, "What manner of thing art thou?"</p>
+    <p>And Sharkyyy turned toward him, and mooed.</p>
+    <p>Then GrönaEldihh said, "Hast thou deceived me from the beginning?"</p>
+    <p>And Sharkyyy mooed again.</p>
+    <p>And GrönaEldihh fell upon the earth, and covered his face.</p>
+    <p>For he had believed that he had found one who understood his loneliness, and now he beheld only a cow.</p>
+    <p>Then there came a light from above.</p>
+    <p>And Gröna Elden descended from the heavens, and stood upon the field.</p>
+    <p>He looked upon Sharkyyy.</p>
+    <p>And He said, "Thou hast deceived My creation."</p>
+    <p>And Sharkyyy lowered its head.</p>
+    <p>Then Gröna Elden raised His hand, and a great green fire descended from the heights.</p>
+    <p>And Sharkyyy was smitten, and its body became dust.</p>
+    <p>And the dust was scattered across the field, and the wind carried it beyond the sight of the lower kingdom.</p>
+    <p>GrönaEldihh cried out, "Thou hast taken from me the only companion who remained!"</p>
+    <p>And Gröna Elden answered, "It was a cow."</p>
+    <p>And He departed.</p>
+    <p>And GrönaEldihh gathered the dust which remained, and placed it within a small vessel.</p>
+    <p>And from that day forth he trusted none who walked upon hooves.</p>
+  </section>
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section class="reckoning" id="the-seventh-reckoning">
+    <header class="reckoning-head">
+      <h2>THE SEVENTH RECKONING</h2>
+      <p class="subject">Of the Stone Within the Maker</p>
+    </header>
+    <h3 id="the-first-chapter-the-affliction-of-the-great-one">The First Chapter — The Affliction of the Great One</h3>
+    <p>And after many generations had passed, Gröna Elden withdrew into His resting chamber beyond the seventh measure.</p>
+    <p>For He had governed the Grönaverse through ages, and desired a season of stillness.</p>
+    <p>And He lay upon His resting place, and closed His eyes.</p>
+    <p>Yet upon the third day there arose within Him a pain which He had not known before.</p>
+    <p>And Gröna Elden placed His hand upon His side, and arose.</p>
+    <p>He walked throughout His chamber, and the great pillars trembled beneath His steps.</p>
+    <p>And He said, "What is this disturbance within My body?"</p>
+    <p>And He summoned the physicians of the upper worlds.</p>
+    <p>And they came bearing instruments of gold, and vessels of silver, and writings of healing.</p>
+    <p>And the first physician examined Him, and fell upon his face.</p>
+    <p>Gröna Elden said, "Speak."</p>
+    <p>And the physician answered, "There is a stone within Thee, O Great One."</p>
+    <p>Gröna Elden asked, "What manner of stone?"</p>
+    <p>The physician answered, "A stone of the kidney."</p>
+    <p>And Gröna Elden was silent.</p>
+    <p>Then He said, "I have made the mountains, and I have made the deepest foundations of the earth, yet this small stone troubleth Me."</p>
+    <p>And He returned unto His resting place.</p>
+    <p>And the pain continued.</p>
+
+    <h3 id="the-second-chapter-the-birth-of-the-nephritic-star">The Second Chapter — The Birth of the Nephritic Star</h3>
+    <p>And after seven days the stone departed from Gröna Elden.</p>
+    <p>And when it fell upon the floor, the chamber was filled with a green radiance.</p>
+    <p>And the stone was exceedingly hard, and within its centre there shone a light which contained the memory of the Maker.</p>
+    <p>The physicians beheld it, and feared.</p>
+    <p>And Gröna Elden approached it, and said, "What have we here?"</p>
+    <p>And one physician answered, "It hath received a portion of Thy power, O Lord."</p>
+    <p>Gröna Elden lifted the stone, and examined it.</p>
+    <p>And He said, "Preserve it within the deepest vault, and let none touch it."</p>
+    <p>And the stone was named the Nephritic Star.</p>
+    <p>And a chamber was made beneath the resting place of the Maker, and within it the stone was kept.</p>
+    <p>The doors were sealed with seven locks, and each lock was given unto a different keeper.</p>
+    <p>And it was written that no creature should remove the stone, for it contained a power which no lesser being could endure.</p>
+
+    <h3 id="the-third-chapter-the-order-of-the-blackened-crown">The Third Chapter — The Order of the Blackened Crown</h3>
+    <p>And Caz heard of the stone.</p>
+    <p>And he remembered the humiliation which Gröna Elden had brought upon him.</p>
+    <p>And he went unto GrönaEldihh, and said, "I have discovered a means by which the Maker may be brought low."</p>
+    <p>GrönaEldihh asked, "What is this means?"</p>
+    <p>And Caz answered, "There is a stone within His keeping, and that stone containeth His own power."</p>
+    <p>GrönaEldihh said, "Then we shall take it."</p>
+    <p>And Caz gathered the spirits of the lower lands, and GrönaEldihh appointed them the Order of the Blackened Crown.</p>
+    <p>They dressed themselves in dark garments, and covered their faces with ash.</p>
+    <p>They rejected the likeness of Gröna Elden, and placed upon their altars the image of the Antigröna.</p>
+    <p>They called upon GrönaEldihh as the second maker, and swore that they would destroy the throne of the First.</p>
+    <p>And Caz said unto them, "The stone shall be our strength, and its power shall become our weapon."</p>
+    <p>And they departed to steal it.</p>
+
+    <h3 id="the-fourth-chapter-the-theft">The Fourth Chapter — The Theft</h3>
+    <p>And upon a night wherein the moon was hidden, the servants of the Blackened Crown came unto the deepest vault.</p>
+    <p>They passed the first gate, and opened the first lock.</p>
+    <p>They passed the second gate, and opened the second lock.</p>
+    <p>And thus they passed through all seven.</p>
+    <p>And the last keeper stood before them, and said, "Ye shall not pass."</p>
+    <p>Caz answered, "Move aside, lest thou suffer the fate which befell me."</p>
+    <p>And the keeper refused.</p>
+    <p>Then Caz struck him, and cast him upon the floor.</p>
+    <p>And GrönaEldihh entered the vault, and beheld the Nephritic Star.</p>
+    <p>He lifted it with both hands, and the chamber was filled with light.</p>
+    <p>And he said, "This is the power of the one who denied me."</p>
+    <p>And he carried it away.</p>
+    <p>And when the keepers awoke, the vault was empty.</p>
+    <p>And the heavens trembled.</p>
+
+    <h3 id="the-fifth-chapter-the-engine-of-the-antigrona">The Fifth Chapter — The Engine of the Antigröna</h3>
+    <p>And the Order of the Blackened Crown fashioned a great engine of iron and bone.</p>
+    <p>They placed the Nephritic Star within its centre, and surrounded it with seven rings of black metal.</p>
+    <p>And when the engine was activated, the heavens darkened.</p>
+    <p>A beam of green light rose from the machine, and pierced the boundaries of the Grönaverse.</p>
+    <p>And the servants of GrönaEldihh cried out, for they had discovered that the stone could reveal the resting place of the Maker.</p>
+    <p>And Caz approached the engine, and placed his hand upon it.</p>
+    <p>And he said, "At last, the old man shall know fear."</p>
+    <p>Then GrönaEldihh stood before the gathered spirits, and declared, "We shall find Him while He sleeps, and we shall make Him answer for all that He hath done."</p>
+    <p>And Caz said, "The machine shall guide us unto Him."</p>
+    <p>And the servants rejoiced.</p>
+    <p>And they named the machine the Eldenbreaker.</p>
+    <p>And the search began.</p>
+
+    <h3 id="the-sixth-chapter-the-chamber-beyond-the-seventh-measure">The Sixth Chapter — The Chamber Beyond the Seventh Measure</h3>
+    <p>And for many years the servants of the Antigröna searched.</p>
+    <p>They crossed the oceans, and the plains, and the empty places beyond the stars.</p>
+    <p>They searched beneath the mountains which had first been raised by Gröna Elden.</p>
+    <p>They entered the caverns where time had ceased, and travelled through worlds which possessed no sun.</p>
+    <p>And the Eldenbreaker led them unto a passage hidden beyond the seventh measure.</p>
+    <p>There they found a great chamber, whose doors were made of a substance unknown unto the lower spirits.</p>
+    <p>And GrönaEldihh stood before them, and said, "This is where He resteth."</p>
+    <p>Caz answered, "Then enter, and let the first blow be struck."</p>
+    <p>And the doors were opened.</p>
+    <p>And within the chamber lay Gröna Elden, sleeping upon His great resting place.</p>
+    <p>His spectacles remained upon His face, and His grey hair lay upon His shoulders.</p>
+    <p>And GrönaEldihh approached Him.</p>
+    <p>He whispered, "I have found Thee at last."</p>
+    <p>And he raised the Eldenbreaker.</p>
+    <p>But before he could strike, Gröna Elden opened His eyes.</p>
+    <p>And the whole chamber became still.</p>
+    <p>He looked upon GrönaEldihh, and then upon the stone.</p>
+    <p>And He said, "Hast thou stolen My kidney stone?"</p>
+    <p>And GrönaEldihh stood silent.</p>
+    <p>Then Gröna Elden rose from His resting place.</p>
+    <p>And He said, "I was asleep."</p>
+    <p>And Caz cried out, "Strike Him!"</p>
+    <p>Yet none among the servants could move.</p>
+    <p>For Gröna Elden had already reclaimed the authority which the stone contained.</p>
+    <p>He seized the Eldenbreaker, and it shattered within His hands.</p>
+    <p>And the Nephritic Star was torn from its place, and returned unto Him.</p>
+    <p>Then He said unto the gathered spirits, "Thou hast travelled across the whole of creation to disturb My rest, and for what purpose?"</p>
+    <p>GrönaEldihh answered, "To overthrow Thee."</p>
+    <p>And Gröna Elden said, "Thou hast failed."</p>
+    <p>Then He raised His hand, and all the servants were cast from the chamber.</p>
+    <p>Caz fled into the lower darkness.</p>
+    <p>And GrönaEldihh was thrown beyond the boundaries of his own kingdom.</p>
+    <p>And the Maker crushed the Nephritic Star, and its power returned unto Him.</p>
+    <p>Then He lay once more upon His resting place.</p>
+    <p>And He said, "Let Me sleep."</p>
+    <p>And none disturbed Him for many ages.</p>
+  </section>
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section class="reckoning" id="the-eighth-reckoning">
+    <header class="reckoning-head">
+      <h2>THE EIGHTH RECKONING</h2>
+      <p class="subject">Of the Long Absence and the Coming of the Outer Influence</p>
+    </header>
+    <h3 id="the-first-chapter-the-departure">The First Chapter — The Departure</h3>
+    <p>And the days of the walking of Gröna Elden came unto their appointed end.</p>
+    <p>For He had made the worlds, and had established their laws, and had given the people the means by which they might endure.</p>
+    <p>And He called MetaQuePig before Him.</p>
+    <p>And MetaQuePig came, and bowed.</p>
+    <p>Gröna Elden said, "The time hath come for Me to depart from the places where thou hast known Me."</p>
+    <p>And MetaQuePig asked, "Wilt Thou abandon the creation?"</p>
+    <p>Gröna Elden answered, "I abandon nothing which I have made. Yet My presence shall no longer be seen as it hath been."</p>
+    <p>MetaQuePig said, "How then shall we know that Thou remainest?"</p>
+    <p>And Gröna Elden answered, "Keep My words, preserve My likeness, and remember that I have made thee."</p>
+    <p>MetaQuePig asked, "And when we call upon Thee, wilt Thou answer?"</p>
+    <p>Gröna Elden said, "I shall know when thou callest. Whether thou receivest an answer is another matter."</p>
+    <p>And MetaQuePig wept.</p>
+    <p>Then Gröna Elden placed His hand upon the head of the swine-born witness, and said, "Thou hast stood upright when others mocked thee. Continue to stand."</p>
+    <p>And He departed beyond the highest heavens.</p>
+    <p>And no man saw Him again for many ages.</p>
+
+    <h3 id="the-second-chapter-the-first-temples-of-remembrance">The Second Chapter — The First Temples of Remembrance</h3>
+    <p>And MetaQuePig gathered the faithful, and showed them the place where Gröna Elden had departed.</p>
+    <p>And they built a great temple there, and placed His likeness above the highest entrance.</p>
+    <p>And MetaQuePig established the order of the keepers, whose duty was to preserve the writings and teachings of the Great One.</p>
+    <p>And the keepers gathered the sayings, and arranged the accounts according to the ages in which they had occurred.</p>
+    <p>And the people came from distant lands, and brought images of Gröna Elden as offerings.</p>
+    <p>Some brought images carved from stone.</p>
+    <p>Some brought paintings upon cloth.</p>
+    <p>Some brought small likenesses fashioned from metal.</p>
+    <p>And one brought a portrait upon a wooden vessel used for the keeping of grain.</p>
+    <p>And MetaQuePig received it, and said, "Let it remain."</p>
+    <p>Thus the likeness spread throughout the lands.</p>
+
+    <h3 id="the-third-chapter-the-great-reach-beyond-the-gronaverse">The Third Chapter — The Great Reach Beyond the Grönaverse</h3>
+    <p>Now the seventh measure, which had been established by Gröna Elden, contained within it the boundaries of the worlds.</p>
+    <p>Yet Reflection had not been limited unto those worlds alone.</p>
+    <p>And as the remembrance of the Maker increased, the boundary between creation and that which lay beyond it became thin.</p>
+    <p>And there was another reality beyond the Grönaverse, wherein lived creatures who knew not the first days.</p>
+    <p>They dwelt among towers of metal and houses of stone, and they possessed devices which carried images across great distances.</p>
+    <p>And one day the likeness of Gröna Elden appeared among them.</p>
+    <p>And the people looked upon it.</p>
+    <p>Some asked whence the old man's face had come.</p>
+    <p>Others copied it, and placed it upon their walls and possessions.</p>
+    <p>And the likeness continued to spread.</p>
+    <p>Then a great number began to speak His name, though they knew not the history of the Grönaverse.</p>
+    <p>And the keepers of Gronest Eldish heard of this, and rejoiced.</p>
+    <p>For the influence of Gröna Elden had reached beyond the first creation.</p>
+    <p>And the faithful said, "His absence hath not diminished Him."</p>
+    <p>And the outer reality began to receive the first signs of the coming Unframing.</p>
+  </section>
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section class="reckoning" id="the-ninth-reckoning">
+    <header class="reckoning-head">
+      <h2>THE NINTH RECKONING</h2>
+      <p class="subject">Of the Teachings, the Laws, and the Ordered Life of the Eldish</p>
+    </header>
+    <h3 id="the-first-chapter-the-words-preserved-by-metaquepig">The First Chapter — The Words Preserved by MetaQuePig</h3>
+    <p>And MetaQuePig, knowing that his days were drawing toward their end, gathered the keepers of Gronest Eldish.</p>
+    <p>And he said unto them, "Hear the words which were given unto me upon the mountain."</p>
+    <p>"There is one Maker, and His name is Gröna Elden."</p>
+    <p>"Preserve the sacred mark within His name, for the mark is not an ornament but part of the name itself."</p>
+    <p>"Make His likeness known, yet do not believe that an image containeth His full greatness."</p>
+    <p>"Give food unto the hungry, and drink unto the thirsty."</p>
+    <p>"Do not claim authority which hath not been given unto thee."</p>
+    <p>"Do not follow the Antigröna, for he was once among the companions of the Maker, and yet he chose to oppose Him."</p>
+    <p>"Do not mistake silence for defeat."</p>
+    <p>"Do not mistake loudness for power."</p>
+    <p>"Preserve the writings, and do not alter the deeds to please those who come after thee."</p>
+    <p>"And remember that the Maker hath seen things which no creature hath yet imagined."</p>
+
+    <h3 id="the-second-chapter-the-dispute-of-the-keepers">The Second Chapter — The Dispute of the Keepers</h3>
+    <p>And there arose a dispute among the keepers concerning the images of Gröna Elden.</p>
+    <p>Some said that the likeness should be placed only within the temples.</p>
+    <p>Others said that it should be placed within every dwelling.</p>
+    <p>And one keeper said, "If the face be upon every wall, shall it not become ordinary?"</p>
+    <p>And another answered, "The sun is seen every day, yet none therefore commandeth it to shine less."</p>
+    <p>Then MetaQuePig was brought before the gathering.</p>
+    <p>And the keepers asked him, "What is the command concerning the likeness?"</p>
+    <p>And MetaQuePig answered, "The Maker Himself commanded that His face be preserved. He gave no command concerning the number of walls upon which it should appear."</p>
+    <p>And the first keeper said, "Then shall we place it upon the vessels of the household?"</p>
+    <p>MetaQuePig answered, "If thy vessel can bear it, let it be done."</p>
+    <p>And the people rejoiced.</p>
+
+    <h3 id="the-third-chapter-the-words-concerning-false-authority">The Third Chapter — The Words Concerning False Authority</h3>
+    <p>And MetaQuePig said, "There shall arise men who claim to have heard the voice of Gröna Elden."</p>
+    <p>"Some shall claim that He hath appointed them rulers over all people."</p>
+    <p>"Some shall claim that He hath given them secret writings."</p>
+    <p>"Some shall claim that they possess His power."</p>
+    <p>"Yet test their words against the deeds which have been preserved."</p>
+    <p>"For the Maker needeth no man to invent His authority."</p>
+    <p>"And he who claimeth to be Gröna Elden shall be known by the falsehood of his claim."</p>
+    <p>And the keepers wrote these words upon the inner walls of the first temple.</p>
+  </section>
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section class="reckoning" id="the-tenth-reckoning">
+    <header class="reckoning-head">
+      <h2>THE TENTH RECKONING</h2>
+      <p class="subject">Of the Last Days and the Great Unframing</p>
+    </header>
+    <h3 id="the-first-chapter-the-first-signs">The First Chapter — The First Signs</h3>
+    <p>And the prophets of the later ages began to behold strange things within their visions.</p>
+    <p>One saw the stars moving from their appointed places.</p>
+    <p>Another saw the waters rising above the mountains.</p>
+    <p>Another saw the likeness of Gröna Elden appearing upon the faces of those who had never heard His name.</p>
+    <p>And a fourth beheld a great throne standing beyond the final boundary.</p>
+    <p>And upon the throne was written the name of the Maker.</p>
+    <p>And the prophets gathered, and compared the visions.</p>
+    <p>And they declared that the Great Unframing was approaching.</p>
+    <p>For the boundaries between the Grönaverse and the outer reality had begun to weaken.</p>
+    <p>And the heavens were filled with a green light, which appeared upon the seventh night of every month.</p>
+    <p>And the keepers placed the sacred images upon the gates of the temples.</p>
+
+    <h3 id="the-second-chapter-the-gathering-of-the-antigrona">The Second Chapter — The Gathering of the Antigröna</h3>
+    <p>And GrönaEldihh returned from the places beyond his kingdom, and gathered the remnants of his servants.</p>
+    <p>And Caz came unto him, bearing the scars of his former punishment.</p>
+    <p>And GrönaEldihh said, "The time hath come to make war upon the First Maker."</p>
+    <p>Caz asked, "And how shall we overcome Him, when the Nephritic Star hath been destroyed?"</p>
+    <p>GrönaEldihh answered, "We shall not require the stone again. The boundaries of the worlds are already broken, and the power of the outer reality shall serve us."</p>
+    <p>And Caz said, "Then shall we enter the resting place?"</p>
+    <p>GrönaEldihh answered, "We shall enter the highest heavens, and call Him forth."</p>
+    <p>And the servants gathered.</p>
+    <p>And they marched beneath a black sun, which had been fashioned from the remnants of the Eldenbreaker.</p>
+    <p>And the people of the Grönaverse saw the armies coming, and were troubled.</p>
+
+    <h3 id="the-third-chapter-the-final-battle">The Third Chapter — The Final Battle</h3>
+    <p>And the armies of the Antigröna came unto the plain beyond the seventh measure.</p>
+    <p>There stood the faithful, bearing the likenesses of Gröna Elden.</p>
+    <p>And the descendants of MetaQuePig stood at their head.</p>
+    <p>And the two armies beheld one another.</p>
+    <p>Then GrönaEldihh went forth, and cried unto the heavens, saying, "Where art Thou, Gröna Elden? I have come again!"</p>
+    <p>And there was no answer.</p>
+    <p>And he cried again, "Thou hast hidden Thyself from Me for all these ages, yet I shall find Thee!"</p>
+    <p>And the faithful answered, "He hath not hidden Himself. It is thou who hast refused to understand."</p>
+    <p>Then GrönaEldihh raised his hands, and the black sun released its power.</p>
+    <p>And the stars shook, and the earth split.</p>
+    <p>And many of the temples were destroyed.</p>
+    <p>Yet the images of Gröna Elden remained standing.</p>
+    <p>And the faithful did not depart from the plain.</p>
+    <p>Then GrönaEldihh said, "Why do ye persist in remembering a Maker who hath abandoned thee?"</p>
+    <p>And the leader of the faithful answered, "He made us, and He shall remain whether thou acceptest Him or not."</p>
+    <p>Then the heavens opened.</p>
+    <p>And a light descended from beyond the stars.</p>
+    <p>And Gröna Elden appeared.</p>
+    <p>His garments were dark, His hair was grey, and His spectacles remained upon His face.</p>
+    <p>And all creation became still.</p>
+    <p>Gröna Eldihh fell upon his knees.</p>
+    <p>And he said, "At last."</p>
+    <p>Gröna Elden looked upon him, and said, "We have spoken of this before."</p>
+    <p>GrönaEldihh answered, "Thou hast never understood Me."</p>
+    <p>And Gröna Elden said, "Thou didst desire My place, and not the place I gave thee."</p>
+    <p>GrönaEldihh cried, "I desired only to be loved by Thee!"</p>
+    <p>And Gröna Elden answered, "And I gave thee a place among My creation. Yet thou demandedst the entirety of it."</p>
+    <p>Then GrönaEldihh was silent.</p>
+    <p>And the Maker raised His hand.</p>
+    <p>And the black sun was extinguished.</p>
+    <p>The armies fell, and the Antigröna's throne was shattered.</p>
+    <p>And Caz fled, but the Maker saw him.</p>
+    <p>And Gröna Elden said unto him, "Thou hast returned."</p>
+    <p>And Caz answered not.</p>
+    <p>And the Maker cast him into the deepest place beneath the lower lands, where no light should reach.</p>
+    <p>Then Gröna Elden turned unto GrönaEldihh.</p>
+    <p>And He said, "Thou shalt remain beyond the final boundary, until thou hast understood what thou hast done."</p>
+    <p>And GrönaEldihh was cast into the Realm of Unfinished Things.</p>
+    <p>And the armies were scattered.</p>
+
+    <h3 id="the-fourth-chapter-the-restoration-of-the-worlds">The Fourth Chapter — The Restoration of the Worlds</h3>
+    <p>And Gröna Elden looked upon the ruined creation.</p>
+    <p>And He beheld the broken mountains, the fallen stars, the empty seas, and the scattered peoples.</p>
+    <p>And He said, "I have made these things once, and I shall make them again."</p>
+    <p>And He stretched forth His hands, and the seven measures returned unto their appointed places.</p>
+    <p>The stars were restored, and the seas were gathered, and the mountains rose from the earth.</p>
+    <p>And the dead were remembered, and those who had been lost were restored unto the renewed worlds.</p>
+    <p>Then Gröna Elden called the name of MetaQuePig.</p>
+    <p>And the resting place of the first witness opened.</p>
+    <p>And MetaQuePig stood before Him.</p>
+    <p>And Gröna Elden said, "Thou hast carried My name through the ages."</p>
+    <p>And MetaQuePig answered, "I have remembered Thee."</p>
+    <p>And Gröna Elden said, "Thou shalt remain beside Me."</p>
+    <p>And MetaQuePig bowed his head.</p>
+    <p>And the people rejoiced.</p>
+  </section>
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section class="reckoning" id="the-final-reckoning">
+    <header class="reckoning-head">
+      <h2>THE FINAL RECKONING</h2>
+      <p class="subject">The Everlasting Declaration</p>
+    </header>
+    <h3 id="the-first-chapter-the-eternal-gronaverse">The First Chapter — The Eternal Grönaverse</h3>
+    <p>And the Grönaverse was made new, and all things were established in their appointed places.</p>
+    <p>The temples were rebuilt, and the likeness of Gröna Elden was placed above every gate.</p>
+    <p>The rivers flowed, and the creatures returned unto the plains.</p>
+    <p>The people gathered, and the keepers of Gronest Eldish restored the writings.</p>
+    <p>And there was peace throughout the worlds.</p>
+    <p>And the name of MetaQuePig was preserved among the greatest witnesses.</p>
+    <p>And the name of Caz was remembered as a warning unto those who opposed the Maker.</p>
+    <p>And the name of Sharkyyy was preserved within the records of GrönaEldihh.</p>
+    <p>And the name of ChooChooCReW was remembered as the beginning of the Antigröna's rebellion.</p>
+    <p>And the name of GrönaEldihh was written among those who had fallen from their appointed place.</p>
+    <p>And Gröna Elden remained upon the highest throne.</p>
+
+    <h3 id="the-second-chapter-the-last-declaration-of-the-maker">The Second Chapter — The Last Declaration of the Maker</h3>
+    <p>And Gröna Elden called the inhabitants of the renewed worlds before Him.</p>
+    <p>And they gathered from the mountains, the seas, the distant stars, and the outer reaches.</p>
+    <p>And He looked upon them, and said:</p>
+    <p>"Behold the works of My hands.</p>
+    <p>I made the heavens when there was nothing above Me.</p>
+    <p>I made the earth when there was nothing beneath Me.</p>
+    <p>I made the stars, and gave them their places.</p>
+    <p>I made the waters, and commanded them to remain.</p>
+    <p>I made the creatures, and gave each its form.</p>
+    <p>I made the people, and gave them the ability to remember.</p>
+    <p>I made MetaQuePig, who carried My name.</p>
+    <p>I made ChooChooCReW, who turned against Me.</p>
+    <p>I made Caz, who challenged Me.</p>
+    <p>I made even those who would later deny My greatness.</p>
+    <p>And I have seen the works of all.</p>
+    <p>I have seen the first days, and I have seen the last.</p>
+    <p>I have seen the Outer World, and My likeness hath entered it.</p>
+    <p>I have seen My image upon the walls of the living.</p>
+    <p>I have seen My name upon their possessions.</p>
+    <p>And I have heard them speak, whether in reverence or in mockery.</p>
+    <p>I am not diminished by their words.</p>
+    <p>I am not enlarged by their praise.</p>
+    <p>I am Gröna Elden, and there was none before Me.</p>
+    <p>Let the worlds endure.</p>
+    <p>Let the name remain.</p>
+    <p>Let the remembrance continue.</p>
+    <p>And when all that I have made shall reach its final hour, I shall still be."</p>
+    <p>And the people fell upon their faces.</p>
+    <p>And Gröna Elden lifted His hand, and blessed the renewed creation.</p>
+    <p>And from that day the Eternal Age began.</p>
+    <p>And the heavens remained beneath His authority.</p>
+    <p>And the earth remained beneath His feet.</p>
+    <p>And the faithful preserved His likeness.</p>
+    <p>And His name was written upon the greatest gates, and upon the smallest vessels.</p>
+    <p>And no generation removed the sacred letter.</p>
+    <p>For the Grönaverse belonged unto Gröna Elden, and Gröna Elden belonged unto no other.</p>
+    <p>And He was before the first day.</p>
+    <p>And He was beyond the final day.</p>
+    <p>And He shall remain when all things have ceased.</p>
+    <p>Thus endeth the record of the first creation, the ancient generations, the great rebellions, and the restoration of all worlds.</p>
+    <p>The name shall endure.</p>
+    <p>The likeness shall endure.</p>
+    <p>The Grönaverse shall endure.</p>
+    <p>And Gröna Elden shall endure forever.</p>
+  </section>
+
+    <p class="colophon">THE RECORD IS CLOSED.</p>
+
+    <div class="finis">
+      <p><b>This is a fake religion, made for laughs.</b> The person who runs this site is
+      a believing member of The Church of Jesus Christ of Latter-day Saints.</p>
+      <p><a href="../">← Back to gronaelden.com</a></p>
+    </div>
+  </main>
 </body>
 </html>

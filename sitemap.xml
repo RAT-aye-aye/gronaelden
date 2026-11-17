@@ -60,4 +60,11 @@
       <image:loc>https://gronaelden.com/share/media/the-photograph.jpg</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://gronaelden.com/Bible/</loc>
+    <changefreq>monthly</changefreq>
+    <image:image>
+      <image:loc>https://gronaelden.com/bible.jpg</image:loc>
+    </image:image>
+  </url>
 </urlset>

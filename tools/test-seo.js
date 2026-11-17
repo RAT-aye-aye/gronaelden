@@ -103,22 +103,66 @@ ok('the disclaimer is visible text, not just metadata',
 ok('the description says it is a joke too', /A fake religion, made for laughs/.test(
   (apex.match(/name="description" content="([^"]+)"/) || [])[1] || ''));
 
-/* ---------- Bible: a real page, deliberately kept out of the index until it has content ---------- */
+/* ---------- Bible: the full text, generated from Bible/scriptures.txt ---------- */
 const bible = read('Bible/index.html');
-ok('bible has a title', /<title>The Book of Gronest — coming soon<\/title>/.test(bible));
+const source = read('Bible/scriptures.txt');
+
+ok('bible has a real title', /<title>The Gröna Scriptures — Gröna Elden<\/title>/.test(bible));
 ok('bible has a canonical url',
   /rel="canonical" href="https:\/\/gronaelden\.com\/Bible\/"/.test(bible));
-ok('bible is kept out of the index while it is empty',
-  /name="robots" content="noindex[^"]*"/.test(bible));
-ok('bible still lets links be followed', /name="robots" content="noindex, follow"/.test(bible));
-ok('bible shows the book', /<img[^>]+src="\.\.\/bible\.jpg"/.test(bible));
-ok('bible declares the real image size',
-  /width="1100"/.test(bible) && /height="1430"/.test(bible));
-ok('bible says coming soon', /Coming soon/i.test(bible));
+ok('bible is indexable now that it has the text',
+  /name="robots" content="index[^"]*"/.test(bible) && !/noindex/.test(bible));
+ok('bible allows large image previews', /max-image-preview:large/.test(bible));
+ok('bible has a description', /name="description" content="[^"]{40,}"/.test(bible));
 ok('bible links back to the apex', /href="\.\.\/"/.test(bible));
 ok('bible carries the disclaimer too', DISCLAIMER.test(bible) && CHURCH.test(bible));
-ok('the sitemap does not list the unindexed bible page',
-  locs.indexOf('https://gronaelden.com/Bible/') === -1, locs);
+ok('the sitemap lists the bible', locs.indexOf('https://gronaelden.com/Bible/') !== -1, locs);
+
+/* structure */
+const reckoningHeads = (bible.match(/<section class="reckoning"/g) || []).length;
+const sourceReckonings = (source.match(/^# /gm) || []).length - 1;
+ok('every reckoning is a section', reckoningHeads === sourceReckonings,
+  { page: reckoningHeads, source: sourceReckonings });
+
+const sourceChapters = (source.match(/^### /gm) || []).length - 1;
+const pageChapters = (bible.match(/<h3 /g) || []).length;
+ok('every chapter is a heading', pageChapters === sourceChapters,
+  { page: pageChapters, source: sourceChapters });
+
+const ids = [...bible.matchAll(/id="([^"]+)"/g)].map((m) => m[1]);
+const dupIds = ids.filter((id, i) => ids.indexOf(id) !== i);
+ok('every id is unique', dupIds.length === 0, dupIds);
+
+const toc = (bible.match(/<nav class="toc"[\s\S]*?<\/nav>/) || [''])[0];
+const tocTargets = [...toc.matchAll(/href="#([^"]+)"/g)].map((m) => m[1]);
+ok('the contents list has an entry per reckoning', tocTargets.length === sourceReckonings, tocTargets.length);
+ok('every contents link lands on an element',
+  tocTargets.every((id) => ids.indexOf(id) !== -1), tocTargets.filter((id) => ids.indexOf(id) === -1));
+
+ok('the record is closed on the page', /THE RECORD IS CLOSED\./.test(bible));
+
+/* the page is generated: every paragraph of the text must survive into it */
+const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const paragraphs = source
+  .split(/\r?\n/)
+  .map((l) => l.trim())
+  .filter((l) => l && !l.startsWith('#') && l !== '---' && !l.startsWith('*'));
+const lost = paragraphs.filter((p) => bible.indexOf('<p>' + escape(p) + '</p>') === -1);
+ok('every paragraph of the text is on the page', lost.length === 0,
+  { missing: lost.length, first: lost[0] });
+
+let drift = '';
+try {
+  require('child_process').execFileSync(
+    process.execPath,
+    [path.join(dir, 'tools', 'build-bible.mjs'), '--check'],
+    { stdio: 'pipe' }
+  );
+} catch (e) {
+  drift = String(e.stdout || e.stderr || e.message).trim();
+}
+ok('the page is what the text file generates', drift === '', drift);
+
 ok('the sitemap image urls all resolve to files',
   imageLocs.every((u) => fs.existsSync(path.join(dir, u.replace('https://gronaelden.com/', '')))),
   imageLocs.filter((u) => !fs.existsSync(path.join(dir, u.replace('https://gronaelden.com/', '')))));

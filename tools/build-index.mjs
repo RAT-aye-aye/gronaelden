@@ -56,13 +56,20 @@ for (const name of files) {
   );
 }
 
-lines.push('  </url>', '</urlset>', '');
+lines.push(
+  '  </url>',
+  '  <url>',
+  '    <loc>https://gronaelden.com/Bible/</loc>',
+  '    <changefreq>monthly</changefreq>',
+  '    <image:image>',
+  '      <image:loc>https://gronaelden.com/bible.jpg</image:loc>',
+  '    </image:image>',
+  '  </url>',
+  '</urlset>',
+  ''
+);
 
 fs.writeFileSync(path.join(dir, 'sitemap.xml'), lines.join('\n'));
 
-/* /Bible/ is deliberately absent: it is a "coming soon" page with no content
-   yet, so it carries noindex and a sitemap entry would only show up in Search
-   Console as "Excluded by noindex tag". Add it here when the book is written. */
-
 console.log(`manifest.json: ${items.length} items`);
-console.log(`sitemap.xml: ${items.length} images + apex photo and bible.jpg`);
+console.log(`sitemap.xml: 3 pages, ${items.length + 2} images`);

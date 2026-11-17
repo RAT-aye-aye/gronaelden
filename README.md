@@ -8,14 +8,37 @@ Gronest: <https://gronaelden.com>. Static, served by GitHub Pages.
 - `photo.jpg` — the portrait (596×468), also the `og:image` for the apex and
   `/share/`, so every link preview shows him.
 - `bible.jpg` — the book cover (1100×1430).
-- `Bible/index.html` — the book page. Currently "coming soon", and therefore
-  `noindex, follow` and kept out of the sitemap until it has real content.
+- `Bible/` — the book. `scriptures.txt` is the text; `index.html` is generated
+  from it by `tools/build-bible.mjs`. Never edit the HTML by hand.
 
 All three pages carry the same footer note: **this is a fake religion, made for
 laughs, and the person who runs the site is a believing member of The Church of
 Jesus Christ of Latter-day Saints.** Keep it on every page — it is the one thing
 that keeps the joke from being mistaken for a real movement, and
 `tools/test-seo.js` / `tools/test-share.js` fail if it goes missing.
+
+## /Bible/ — the Gröna Scriptures
+
+<https://gronaelden.com/Bible/> is the full text: eleven reckonings, 38
+chapters, ~8,000 words, one page, with a contents list.
+
+- **`Bible/scriptures.txt` is the source of truth.** Edit that, then:
+
+  ```sh
+  node tools/build-bible.mjs          # regenerate Bible/index.html
+  node tools/build-bible.mjs --check  # fail if the HTML is stale
+  ```
+
+  `tools/test-seo.js` runs the `--check` for you, checks that every paragraph of
+  the text survives onto the page, that headings and contents links match the
+  source, and that no id is duplicated. The HTML is a build artefact: do not
+  hand-edit it, the next build will overwrite it.
+- The page is `index, follow` and in the sitemap now that it has content, with
+  `book` Open Graph type and the cover as its preview image.
+- `# THE FIRST RECKONING` in the text is a section, `##` beneath it is that
+  section's subtitle, `###` is a chapter, `**...**` is the closing line, and
+  `---` is ignored. That is the whole format.
+
 
 ## /share/ — the G.E. Archive
 
@@ -55,14 +78,9 @@ Upload page:
 ## Search engines
 
 - `robots.txt` allows everything and points at `https://gronaelden.com/sitemap.xml`.
-- `sitemap.xml` lists the apex, `/share/`, and every file in `share/media` as an
-  `image:image`, plus `photo.jpg` and `bible.jpg` under the apex.
-  `share/media/manifest.json` is the gallery's first paint.
-- `/Bible/` is **not** in the sitemap while it says "coming soon": a page with
-  no content earns an "Excluded by noindex tag" line in Search Console and no
-  traffic. When the book is written, drop the `noindex` meta tag from
-  `Bible/index.html` and add the URL to `tools/build-index.mjs` — `test-seo.js`
-  asserts both states, so it will tell you if only one is done.
+- `sitemap.xml` lists the apex, `/share/`, `/Bible/`, and every file in
+  `share/media` as an `image:image`, plus `photo.jpg` and `bible.jpg` under the
+  apex. `share/media/manifest.json` is the gallery's first paint.
 - Both are generated. After adding or removing files, run:
 
   ```sh
@@ -92,4 +110,7 @@ NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-seo.js
 
 # regenerate manifest.json + sitemap.xml after adding media
 node tools/build-index.mjs
+
+# regenerate Bible/index.html after editing Bible/scriptures.txt
+node tools/build-bible.mjs
 ```
