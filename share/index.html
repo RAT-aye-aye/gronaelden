@@ -83,6 +83,19 @@
     font-size: 11.5px;
     font-variant-numeric: tabular-nums;
   }
+  .scroller {
+    color: #d9f2cf;
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 600;
+    background: rgba(125, 191, 99, .10);
+    border: 1px solid rgba(125, 191, 99, .38);
+    padding: 5px 10px;
+    border-radius: 9px;
+    white-space: nowrap;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .scroller:hover, .scroller:focus-visible { background: rgba(125, 191, 99, .18); border-color: rgba(125, 191, 99, .6); outline: none; }
   .refresh {
     font: inherit;
     font-size: 12px;
@@ -283,6 +296,7 @@
     <a class="back" href="../">← gronaelden.com</a>
     <h1><span class="dot" aria-hidden="true"></span>G.E. Archive</h1>
     <span class="meta" id="meta">loading…</span>
+    <a class="scroller" href="../scroller/">▶ Scroller</a>
     <button class="refresh" id="refresh" title="Check for new files" aria-label="Refresh">↻</button>
   </header>
 
