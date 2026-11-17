@@ -12,17 +12,13 @@ Every page must say, in visible text, that this is a fake religion made for
 laughs and that the owner of gronaelden.com is a believing member of The Church
 of Jesus Christ of Latter-day Saints.
 
-`tools/test-disclaimer.js` checks it, and takes no dependencies:
+There are no checks and no tests for it. It is a manual rule: if you edit a
+page, look at the footer before you push. Reword it if you like, but keep both
+facts in it — that it is fake and for laughs, and that the person who runs the
+domain is a believing member of the Church.
 
-```sh
-node tools/test-disclaimer.js      # run this after any edit to a page
-```
-
-It looks for the two facts in visible text on every page, and it ignores
-anything hidden in an HTML comment, because a reader cannot see a comment. Keep
-the disclaimer, reword it if you like, but keep both facts in it. Everything
-else here — the book, the pictures, the jokes — is yours to change, delete, or
-burn.
+Everything else here — the book, the pictures, the jokes — is yours to change,
+delete, or burn.
 
 ## What is here
 

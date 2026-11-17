@@ -21,8 +21,8 @@ that keeps the joke from being mistaken for a real movement, and
 
 See **`HANDOFF.md`**. One rule travels with the repo: every page keeps the
 disclaimer saying it is a fake religion and that the owner is a believing member
-of The Church of Jesus Christ of Latter-day Saints. `tools/test-disclaimer.js`
-checks it (plain Node, no dependencies); everything else is fair game.
+of The Church of Jesus Christ of Latter-day Saints. It is a manual rule, not a
+test: check the footer when you edit a page. Everything else is fair game.
 
 ## /Bible/ — the Gröna Scriptures
 
