@@ -17,6 +17,13 @@ Jesus Christ of Latter-day Saints.** Keep it on every page — it is the one thi
 that keeps the joke from being mistaken for a real movement, and
 `tools/test-seo.js` / `tools/test-share.js` fail if it goes missing.
 
+## Handing it off
+
+See **`HANDOFF.md`**. One rule travels with the repo: every page keeps the
+disclaimer saying it is a fake religion and that the owner is a believing member
+of The Church of Jesus Christ of Latter-day Saints. `tools/test-disclaimer.js`
+and the `disclaimer` workflow enforce it; everything else is fair game.
+
 ## /Bible/ — the Gröna Scriptures
 
 <https://gronaelden.com/Bible/> is the full text: three parts, 17 chapters,
