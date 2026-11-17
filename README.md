@@ -19,10 +19,18 @@ that keeps the joke from being mistaken for a real movement, and
 
 ## /Bible/ — the Gröna Scriptures
 
-<https://gronaelden.com/Bible/> is the full text: seven books, 19 chapters,
-~3,000 words, one page, with a contents list. It is written in the first person
-by **MetaQuePig**, the villain, who was made the record-keeper by a god who never
-called him — which is why the book keeps insisting he was the hero.
+<https://gronaelden.com/Bible/> is the full text: three parts, 13 chapters,
+~2,000 words, one page, with a contents list. Third person, scriptural, and
+deliberately spare: **Gröna Elden is the only named thing in it.** No other
+character, place or church has a name — the people, the keepers, the house,
+the hill.
+
+The doctrine is the point. Each teaching in the middle section takes an LDS
+distinctive and refuses it: no pre-mortal life, no ladder to godhood, no
+eternal families, no more prophets, no houses, no money, no missions, one
+unranked heaven. The agency chapter is the hinge — he gives them freedom,
+they beg for a law, he says "Thou mustn't anything", and the keepers write
+612 commandments in his name. Then he comes back and says he never said it.
 
 - **`Bible/scriptures.txt` is the source of truth.** Edit that, then:
 

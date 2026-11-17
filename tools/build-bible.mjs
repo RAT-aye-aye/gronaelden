@@ -134,7 +134,7 @@ const html = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#05070a">
 <title>${esc(titleCase(book.title))} — Gröna Elden</title>
-<meta name="description" content="${esc(book.subtitles.join('. '))}. The complete scripture of Gronest Eldish.">
+<meta name="description" content="${esc(book.subtitles.join('. '))}. The complete scripture.">
 <link rel="canonical" href="https://gronaelden.com/Bible/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta property="og:type" content="book">
