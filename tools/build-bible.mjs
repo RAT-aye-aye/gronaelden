@@ -377,7 +377,7 @@ const html = `<!DOCTYPE html>
 <body>
   <nav class="bar">
     <a href="../">← Gröna Elden</a>
-    <span class="brand">Gronest Eldish</span>
+    <span class="brand">The Record</span>
     <a href="#contents">Contents</a>
   </nav>
 
