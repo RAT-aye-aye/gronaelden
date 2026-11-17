@@ -34,11 +34,12 @@ missionary work, and degrees of glory.
 
 **Agency closes the section, on purpose.** After he has laid out every principle
 — believe, turn again, be washed, keep the covenant, bring the tenth, keep the
-word of wisdom, go to the nations, do for thy dead — he says the thing that
-makes them all gifts: *"Thou hast no need to do any of it… Thou mayest choose.
-I will not compel thee, no, not even to save thee."* The principles are counsel,
-not a chain; the gate of the garden stands open. Then a keeper writes the counsel
-in a book and sets a rod beside it, and the falling away begins.
+word of wisdom, go to the nations, do for thy dead — he says both halves of the
+doctrine: *"Thou hast no need to do any of it to be loved"*, and *"thou hast need
+of it to become."* The principles are a road, not a price: no compulsion, no rod
+sent after anyone, and no promise either — the blessing is in the keeping, and
+the lesson is in the not keeping. Then a keeper writes the counsel in a book and
+sets a rod beside it, and the falling away begins.
 
 It ends in an apostasy, not an argument: the covenant is kept for a season,
 the keepers turn counsel into a debt, the house falls, and the record waits in
