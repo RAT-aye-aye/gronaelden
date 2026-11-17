@@ -30,13 +30,19 @@ The doctrine is the point, and it **affirms** the LDS distinctives rather than
 refusing them: pre-mortal life behind a veil, agency that cannot be compelled,
 earth as a proving, covenant and sealing, continuing prophets, priesthood by
 the laying on of hands, ordinances for the dead, tithing, the Word of Wisdom,
-missionary work, and degrees of glory. The agency chapter is the hinge — he
-says "Thou hast no need to do anything. Thou mayest choose", a keeper writes
-down only the first half as "Thou needst do nothing", and the people keep that
-half for a thousand years until he corrects the pen.
+missionary work, and degrees of glory.
+
+**Agency closes the section, on purpose.** After he has laid out every principle
+— believe, turn again, be washed, keep the covenant, bring the tenth, keep the
+word of wisdom, go to the nations, do for thy dead — he says the thing that
+makes them all gifts: *"Thou hast no need to do any of it… Thou mayest choose.
+I will not compel thee, no, not even to save thee."* The principles are counsel,
+not a chain; the gate of the garden stands open. Then a keeper writes the counsel
+in a book and sets a rod beside it, and the falling away begins.
 
 It ends in an apostasy, not an argument: the covenant is kept for a season,
-the keepers alter the record, the house falls, and the record waits in the hill.
+the keepers turn counsel into a debt, the house falls, and the record waits in
+the hill.
 
 - **`Bible/scriptures.txt` is the source of truth.** Edit that, then:
 
