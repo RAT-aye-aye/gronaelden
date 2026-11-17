@@ -19,18 +19,23 @@ that keeps the joke from being mistaken for a real movement, and
 
 ## /Bible/ — the Gröna Scriptures
 
-<https://gronaelden.com/Bible/> is the full text: three parts, 13 chapters,
-~2,000 words, one page, with a contents list. Third person, scriptural, and
+<https://gronaelden.com/Bible/> is the full text: three parts, 17 chapters,
+~2,500 words, one page, with a contents list. Third person, scriptural, and
 deliberately spare: **Gröna Elden is the only named thing in it.** No other
 character, place or church has a name — the people, the keepers, the house,
-the hill.
+the hill. And no Jesus, no Father, no Christ: Gröna Elden is the god of this
+world only, so the book never mentions another.
 
-The doctrine is the point. Each teaching in the middle section takes an LDS
-distinctive and refuses it: no pre-mortal life, no ladder to godhood, no
-eternal families, no more prophets, no houses, no money, no missions, one
-unranked heaven. The agency chapter is the hinge — he gives them freedom,
-they beg for a law, he says "Thou mustn't anything", and the keepers write
-612 commandments in his name. Then he comes back and says he never said it.
+The doctrine is the point, and it **affirms** the LDS distinctives rather than
+refusing them: pre-mortal life behind a veil, agency that cannot be compelled,
+earth as a proving, covenant and sealing, continuing prophets, priesthood by
+the laying on of hands, ordinances for the dead, tithing, the Word of Wisdom,
+missionary work, and degrees of glory. The agency chapter is the hinge — he
+commands "Choose", a keeper writes it down as "Thou mustn't anything", and the
+people keep the scribal error for a thousand years until he corrects it.
+
+It ends in an apostasy, not an argument: the covenant is kept for a season,
+the keepers alter the record, the house falls, and the record waits in the hill.
 
 - **`Bible/scriptures.txt` is the source of truth.** Edit that, then:
 
