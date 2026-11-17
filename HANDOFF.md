@@ -20,6 +20,12 @@ domain is a believing member of the Church.
 Everything else here — the book, the pictures, the jokes — is yours to change,
 delete, or burn.
 
+## If you don't want to use a terminal
+
+Read **`HOW-TO.md`**. It is the same job done entirely on github.com in a
+browser: open a file, tap the pencil, change the words, tap Commit. Pictures
+are drag and drop.
+
 ## What is here
 
 | Path | What it is |
