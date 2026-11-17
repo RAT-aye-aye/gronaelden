@@ -19,8 +19,10 @@ that keeps the joke from being mistaken for a real movement, and
 
 ## /Bible/ — the Gröna Scriptures
 
-<https://gronaelden.com/Bible/> is the full text: eleven reckonings, 38
-chapters, ~8,000 words, one page, with a contents list.
+<https://gronaelden.com/Bible/> is the full text: seven books, 19 chapters,
+~3,000 words, one page, with a contents list. It is written in the first person
+by **MetaQuePig**, the villain, who was made the record-keeper by a god who never
+called him — which is why the book keeps insisting he was the hero.
 
 - **`Bible/scriptures.txt` is the source of truth.** Edit that, then:
 

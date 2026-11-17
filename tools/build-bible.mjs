@@ -89,16 +89,17 @@ if (dupes.length) {
 
 /* ---------- assemble ---------- */
 
-const titleCase = (s) =>
-  s
-    .toLowerCase()
-    .split(' ')
-    .map((w, i) =>
-      ['of', 'the', 'and', 'a', 'an', 'to', 'in', 'upon', 'which', 'from', 'for', 'who'].includes(w) && i > 0
-        ? w
-        : w.charAt(0).toUpperCase() + w.slice(1)
-    )
+const SMALL = ['of', 'the', 'and', 'a', 'an', 'to', 'in', 'upon', 'which', 'from', 'for', 'who'];
+const titleCase = (s) => {
+  const words = s.toLowerCase().split(' ');
+  return words
+    .map((w, i) => {
+      const afterDash = i > 0 && /[—–-]$/.test(words[i - 1]);
+      if (SMALL.includes(w) && i > 0 && !afterDash) return w;
+      return w.charAt(0).toUpperCase() + w.slice(1);
+    })
     .join(' ');
+};
 
 const toc = book.sections
   .map(
@@ -133,7 +134,7 @@ const html = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#05070a">
 <title>${esc(titleCase(book.title))} — Gröna Elden</title>
-<meta name="description" content="${esc(book.subtitles.join('. '))}. The complete scripture of Gronest Eldish, in eleven reckonings.">
+<meta name="description" content="${esc(book.subtitles.join('. '))}. The complete scripture of Gronest Eldish.">
 <link rel="canonical" href="https://gronaelden.com/Bible/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta property="og:type" content="book">
