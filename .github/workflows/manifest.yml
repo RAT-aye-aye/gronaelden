@@ -1,0 +1,37 @@
+name: Update media manifest
+
+on:
+  push:
+    paths:
+      - 'share/media/**'
+      - '!share/media/manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build manifest.json from the files in share/media
+        run: |
+          python3 - <<'PY'
+          import os, json, re
+          d = 'share/media'
+          ext = re.compile(r'\.(jpe?g|png|gif|webp|avif|mp4|webm)$', re.I)
+          names = sorted((n for n in os.listdir(d) if ext.search(n)), key=str.lower)
+          items = [{"name": n, "size": os.path.getsize(os.path.join(d, n))} for n in names]
+          with open(os.path.join(d, 'manifest.json'), 'w') as f:
+              json.dump({"items": items}, f, indent=2)
+          print(len(items), "files listed")
+          PY
+
+      - name: Commit if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add share/media/manifest.json
+          git diff --cached --quiet || (git commit -m "Update media manifest" && git push)
