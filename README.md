@@ -31,8 +31,9 @@ refusing them: pre-mortal life behind a veil, agency that cannot be compelled,
 earth as a proving, covenant and sealing, continuing prophets, priesthood by
 the laying on of hands, ordinances for the dead, tithing, the Word of Wisdom,
 missionary work, and degrees of glory. The agency chapter is the hinge — he
-commands "Choose", a keeper writes it down as "Thou mustn't anything", and the
-people keep the scribal error for a thousand years until he corrects it.
+says "Thou hast no need to do anything. Thou mayest choose", a keeper writes
+down only the first half as "Thou needst do nothing", and the people keep that
+half for a thousand years until he corrects the pen.
 
 It ends in an apostasy, not an argument: the covenant is kept for a season,
 the keepers alter the record, the house falls, and the record waits in the hill.
