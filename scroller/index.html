@@ -162,7 +162,7 @@
     if (it.kind === 'video') { m.src = it.url; m.onloadeddata = function () { m.classList.add('on'); }; }
     else {
       m.onload = function () { m.classList.add('on'); };
-      m.onerror = function () { s.remove(); };
+      m.onerror = function () { if (!s.dataset.retried) { s.dataset.retried = 1; setTimeout(function () { m.src = it.url + '?r=' + Date.now(); }, 1500); } else { m.classList.add('on'); m.alt = 'Could not load this one'; } };
       m.src = it.url;
       if (bgb) bgb.style.backgroundImage = 'url("' + it.url + '")';
     }
@@ -199,8 +199,25 @@
   });
   feed.focus();
 
-  Promise.all([listLive(), listManifest()]).then(function (r) {
-    items = r[0].length ? r[0] : r[1];
+  function listCached() {
+    try {
+      var d = JSON.parse(sessionStorage.getItem('ge.archive.v1'));
+      return { fresh: Date.now() - d.time < 600000, items: parse(d.items) };
+    } catch (e) { return { fresh: false, items: [] }; }
+  }
+  function lastKnown() {
+    try { var l = JSON.parse(localStorage.getItem('ge.scroller.last')); return Array.isArray(l) ? l.filter(function (x) { return x && typeof x.url === 'string'; }) : []; }
+    catch (e) { return []; }
+  }
+  var cached = listCached();
+  Promise.all([cached.fresh && cached.items.length ? Promise.resolve([]) : listLive(), listManifest()]).then(function (r) {
+    var live = r[0];
+    if (live.length) {
+      items = live;                                   // the real, current list from GitHub
+      try { localStorage.setItem('ge.scroller.last', JSON.stringify(live)); } catch (e) {}
+    } else {                                          // GitHub unreachable: best backup we have
+      items = [cached.items, lastKnown(), r[1]].sort(function (x, y) { return y.length - x.length; })[0];
+    }
     if (!items.length) {
       stateEl.innerHTML = '<div><b>No pictures found.</b><br>Add photos or GIFs to the archive and they will show up here.</div>';
       return;
