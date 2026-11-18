@@ -1,19 +1,88 @@
 {
   "items": [
     {
-      "name": "auragrona.png"
+      "name": "BigGrona.png",
+      "size": 3315198
     },
     {
-      "name": "BigGrona.png"
+      "name": "Chaosgrona.png",
+      "size": 3774362
     },
     {
-      "name": "Chaosgrona.png"
+      "name": "Creepygrona.png",
+      "size": 2692386
     },
     {
-      "name": "Creepygrona.png"
+      "name": "Emojigrona.png",
+      "size": 1025793
     },
     {
-      "name": "Emojigrona.png"
+      "name": "GronaAndHisCousin.png",
+      "size": 2607073
+    },
+    {
+      "name": "GronaAtaBar.png",
+      "size": 2269342
+    },
+    {
+      "name": "GronaCowboy.png",
+      "size": 2587722
+    },
+    {
+      "name": "GronaMilk.png",
+      "size": 2661235
+    },
+    {
+      "name": "GronaReadingGrona.png",
+      "size": 2921467
+    },
+    {
+      "name": "Idkwhathtisisgrona.png",
+      "size": 986669
+    },
+    {
+      "name": "MikuGrona.png",
+      "size": 1973386
+    },
+    {
+      "name": "MonkeyGrona.png",
+      "size": 2411413
+    },
+    {
+      "name": "MurrayGrona.png",
+      "size": 1158109
+    },
+    {
+      "name": "PigGrona.png",
+      "size": 2741860
+    },
+    {
+      "name": "Possessedgrona.png",
+      "size": 2924262
+    },
+    {
+      "name": "Rainbowgrona.png",
+      "size": 2924177
+    },
+    {
+      "name": "TheSecondComing.png",
+      "size": 2775884
+    },
+    {
+      "name": "TuffGrona.jpg",
+      "size": 134810
+    },
+    {
+      "name": "Untitled-1.gif",
+      "size": 155423
+    },
+    {
+      "name": "YenGrona.png",
+      "size": 1182734
+    },
+    {
+      "name": "auragrona.png",
+      "size": 416474
     },
     {
       "name": "grona-elden-ascended.jpg",
@@ -76,59 +145,12 @@
       "size": 30206
     },
     {
-      "name": "GronaAndHisCousin.png"
-    },
-    {
-      "name": "GronaAtaBar.png"
-    },
-    {
-      "name": "GronaCowboy.png"
-    },
-    {
-      "name": "GronaMilk.png"
-    },
-    {
-      "name": "GronaReadingGrona.png"
-    },
-    {
-      "name": "Idkwhathtisisgrona.png"
-    },
-    {
-      "name": "justrandomshit.png"
-    },
-    {
-      "name": "MikuGrona.png"
-    },
-    {
-      "name": "MonkeyGrona.png"
-    },
-    {
-      "name": "MurrayGrona.png"
-    },
-    {
-      "name": "PigGrona.png"
-    },
-    {
-      "name": "Possessedgrona.png"
-    },
-    {
-      "name": "Rainbowgrona.png"
+      "name": "justrandomshit.png",
+      "size": 618302
     },
     {
       "name": "the-photograph.jpg",
       "size": 324425
-    },
-    {
-      "name": "TheSecondComing.png"
-    },
-    {
-      "name": "TuffGrona.jpg"
-    },
-    {
-      "name": "Untitled-1.gif"
-    },
-    {
-      "name": "YenGrona.png"
     }
   ]
 }

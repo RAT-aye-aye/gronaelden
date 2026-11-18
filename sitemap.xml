@@ -15,6 +15,69 @@
     <loc>https://gronaelden.com/share/</loc>
     <changefreq>weekly</changefreq>
     <image:image>
+      <image:loc>https://gronaelden.com/share/media/BigGrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/Chaosgrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/Creepygrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/Emojigrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/GronaAndHisCousin.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/GronaAtaBar.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/GronaCowboy.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/GronaMilk.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/GronaReadingGrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/Idkwhathtisisgrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/MikuGrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/MonkeyGrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/MurrayGrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/PigGrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/Possessedgrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/Rainbowgrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/TheSecondComing.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/TuffGrona.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/Untitled-1.gif</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/YenGrona.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/auragrona.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://gronaelden.com/share/media/grona-elden-ascended.jpg</image:loc>
     </image:image>
     <image:image>
@@ -58,6 +121,9 @@
     </image:image>
     <image:image>
       <image:loc>https://gronaelden.com/share/media/grona-elden-tongue.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gronaelden.com/share/media/justrandomshit.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://gronaelden.com/share/media/the-photograph.jpg</image:loc>
