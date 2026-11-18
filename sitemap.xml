@@ -70,4 +70,8 @@
       <image:loc>https://gronaelden.com/bible.jpg</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://gronaelden.com/watch/</loc>
+    <changefreq>weekly</changefreq>
+  </url>
 </urlset>

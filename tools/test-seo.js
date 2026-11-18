@@ -30,6 +30,7 @@ const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 ok('sitemap is a urlset', sitemap.indexOf('http://www.sitemaps.org/schemas/sitemap/0.9') !== -1);
 ok('sitemap lists the apex', locs.indexOf('https://gronaelden.com/') !== -1);
 ok('sitemap lists the archive', locs.indexOf('https://gronaelden.com/share/') !== -1);
+ok('sitemap lists the moving record', locs.indexOf('https://gronaelden.com/watch/') !== -1, locs);
 
 const imageLocs = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((m) => m[1]);
 const media = fs

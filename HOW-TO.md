@@ -59,6 +59,25 @@ does not, open `manifest.json` and add it by hand:
 
 `size` is only used for the little "1.2 MB" label, so `0` just hides the label.
 
+## Add a video
+
+Open **`watch/index.html`** and find the block that starts:
+
+```html
+<article class="film" data-id="8JsQNIgAaIE">
+```
+
+Copy that whole block, paste it below itself, and change four things:
+
+1. `data-id` — the bit after `youtu.be/` in the link
+2. the poster `src` — put your id in place of `8JsQNIgAaIE` in
+   `https://i.ytimg.com/vi/8JsQNIgAaIE/hqdefault.jpg`
+3. the `aria-label`, the `.title`, and the `.note` words
+4. the two `youtube.com/watch?v=...` links
+
+That is all. No build step, no terminal. The page only loads a player when
+someone taps the picture, so ten videos still cost nothing to open.
+
 ## Change the colours
 
 At the top of `index.html` (and `share/index.html`) there is a block like:

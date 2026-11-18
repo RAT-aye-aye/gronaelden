@@ -65,6 +65,10 @@ lines.push(
   '      <image:loc>https://gronaelden.com/bible.jpg</image:loc>',
   '    </image:image>',
   '  </url>',
+  '  <url>',
+  '    <loc>https://gronaelden.com/watch/</loc>',
+  '    <changefreq>weekly</changefreq>',
+  '  </url>',
   '</urlset>',
   ''
 );
@@ -72,4 +76,4 @@ lines.push(
 fs.writeFileSync(path.join(dir, 'sitemap.xml'), lines.join('\n'));
 
 console.log(`manifest.json: ${items.length} items`);
-console.log(`sitemap.xml: 3 pages, ${items.length + 2} images`);
+console.log(`sitemap.xml: 4 pages, ${items.length + 2} images`);

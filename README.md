@@ -10,8 +10,13 @@ Gronest: <https://gronaelden.com>. Static, served by GitHub Pages.
 - `bible.jpg` — the book cover (1100×1430).
 - `Bible/` — the book. `scriptures.txt` is the text; `index.html` is generated
   from it by `tools/build-bible.mjs`. Never edit the HTML by hand.
+- `watch/` — **The Moving Record**, the video page. Hand-written HTML, no build
+  step: one `<article class="film" data-id="…">` block per film, so adding a
+  video is copy, change four values, paste. Poster frames come from
+  `i.ytimg.com`, the player is `youtube-nocookie.com`, and **nothing is
+  requested from YouTube until a frame is tapped.**
 
-All three pages carry the same footer note: **this is a fake religion, made for
+Every page carries the same footer note: **this is a fake religion, made for
 laughs, and the person who runs the site is a believing member of The Church of
 Jesus Christ of Latter-day Saints.** Keep it on every page — it is the one thing
 that keeps the joke from being mistaken for a real movement, and
